@@ -8,7 +8,7 @@
   cfg = config.normal;
 in
   with lib;
-    mkIf cfg.wm.niri.enable {
+    mkIf (config.normal.wm.gnome.enable || config.normal.wm.niri.enable) {
       ## Screen
       programs.light.enable = true;
 
@@ -35,7 +35,11 @@ in
       ];
 
       environment.systemPackages = with pkgs; [
-        # pactl audio control cli
+        # Font support
+        fontconfig
+        # Notification support
+        libnotify
+        # Audio - pactl audio control cli
         pulseaudio
         pamixer
       ];

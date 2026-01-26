@@ -33,12 +33,6 @@ in
         qt6Packages.qt6ct
         # libsForQt5.qt5ct
         # qgnomeplatform
-
-        # Notification support
-        libnotify
-
-        # Font support
-        fontconfig
       ];
       # Cursor theming
       home.pointerCursor = {

@@ -17,8 +17,10 @@ with lib;
         # App launcher
         ".config/yofi".source = dotfiles/yofi;
 
-        # Window Manager (niri)
+        ## Window Manager (niri)
         ".config/niri/config.kdl".source = dotfiles/niri/config.kdl;
+        ".config/niri/outputs.kdl".source = dotfiles/niri/outputs.kdl;
+        # submaps
         ".config/niri/main.kdl".source = dotfiles/niri/main.kdl;
         ".config/niri/manageable.kdl".source = dotfiles/niri/manageable.kdl;
 
