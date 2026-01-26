@@ -41,10 +41,6 @@ with lib;
       # Yofi and dependencies
       inputs.yofi.packages.${system}.default
 
-      # Font support
-      libnotify
-      fontconfig
-
       # Wallpapers
       swww
       image_to_grayscale

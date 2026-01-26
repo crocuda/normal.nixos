@@ -13,7 +13,8 @@ with lib;
       loupe
       # pdf viewer
       evince
-      invoice
+
+      # invoice
     ];
 
     # Default apps

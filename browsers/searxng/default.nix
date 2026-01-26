@@ -26,7 +26,7 @@ with lib;
     };
     services.searx = {
       enable = true;
-      package = pkgs-unstable.searxng;
+      # package = pkgs-unstable.searxng;
       redisCreateLocally = true;
       environmentFile = "/var/lib/searx/secret";
       settings = {
