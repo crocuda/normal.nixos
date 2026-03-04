@@ -14,12 +14,21 @@ in
       # for our needs.
       # programs.niri.enable = true;
 
+      ## Restore niri session (desktop placement and window sizes).
+      # services.nirinit = {
+      # enable = true;
+      # settings = {
+      # };
+      # };
+
       environment.systemPackages = with pkgs; let
         system = stdenv.hostPlatform.system;
       in [
         ## Window manager
         pkgs-unstable.niri
         xwayland-satellite
+        ## Niri plugin
+        # inputs.nirinit.packages.${system}.default
 
         ## keyboard daemons
         inputs.mudras.packages.${system}.default

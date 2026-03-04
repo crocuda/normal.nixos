@@ -24,6 +24,9 @@ spawn-sh-at-startup "waybar -c ~/.config/waybar/main.jsonc"
 spawn-sh-at-startup "waybar -c ~/.config/waybar/metrics.jsonc"
 spawn-sh-at-startup "waybar -c ~/.config/waybar/workspaces.jsonc"
 
+// Restore session
+// spawn-sh-at-startup "nirinit"
+
 // Deprecated
 // spawn-at-startup "wlr-which-key"
 
@@ -94,6 +97,7 @@ layout {
   //   radius 12.0
   //   noise 0.0
   // }
+
 }
 
 

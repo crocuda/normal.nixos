@@ -20,8 +20,8 @@
   '';
   umount_cryptstorage = pkgs.writeShellScriptBin "umount_cryptstorage" ''
     fn() {
-      ${pkgs.util-linux}/bin/umount /run/media/HDD
-      ${pkgs.systemd}/bin/systemd-cryptsetup detach cryptstorage
+      sudo ${pkgs.util-linux}/bin/umount /run/media/HDD
+      sudo ${pkgs.systemd}/bin/systemd-cryptsetup detach cryptstorage
     }
     fn
   '';
@@ -45,8 +45,8 @@ in
         ACTION=="remove",\
         ENV{SUBSYSTEM}=="usb",\
         ENV{PRODUCT}=="1050/407/543",\
+        RUN+="${umount_cryptstorage}/bin/umount_cryptstorage",\
         RUN+="${pkgs.systemd}/bin/systemctl start kill_all_sessions",\
-        RUN+="${umount_cryptstorage}/bin/umount_cryptstorage"
       '';
 
       environment.systemPackages = with pkgs; [
@@ -82,5 +82,5 @@ in
       # programs.gnupg.agent = {
       #   enable = true;
       #   enableSSHSupport = true;
-      #};
+      # };
     }

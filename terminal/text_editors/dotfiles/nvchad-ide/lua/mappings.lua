@@ -4,6 +4,10 @@ local map = vim.keymap.set
 local nomap = vim.keymap.del
 local lsp = vim.lsp
 
+--Leader
+vim.g.mapleader = " "
+vim.g.localleader = "\\"
+
 -- Help
 -- open help in vertical buffer
 map("ca", "help", "vert help", {
@@ -135,21 +139,20 @@ map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>z.", { desc = "LSP go to de
 map("n", "gi", lsp.buf.implementation, { desc = "LSP go to implementation" })
 map("n", "gu", lsp.buf.code_action, { desc = "LSP go to code action" })
 
--- Next/Prev Error
+-- Next/Prev Error in current file/buffer
 map(
   "n",
   "ge",
   "<cmd>lua vim.diagnostic.jump({ count=1, severity=vim.diagnostic.severity.ERROR })<cr> \
   <cmd>call smoothie#do('z.')<cr>",
-  { desc = "LSP go to next diagnostic" }
+  { desc = "LSP go to next error in buffer" }
 )
-
 map(
   "n",
   "gE",
   "<cmd>lua vim.diagnostic.jump({ count=-1, severity=vim.diagnostic.severity.ERROR })<cr> \
   <cmd>call smoothie#do('z.')<cr>",
-  { desc = "LSP go to prev diagnostic" }
+  { desc = "LSP go to prev error in buffer" }
 )
 
 map("n", "<leader>D", lsp.buf.type_definition)
@@ -186,7 +189,11 @@ map("n", "<leader>tx", "<cmd>silent grep FIX <bar> copen <cr>", { desc = "Open b
 
 -- Test suite
 --
-map("n", "<leader>tt", "<cmd>TestFile<cr>", { desc = "Test launch nearest test suite" })
+map("n", "<leader>tt", "<cmd>TestNearest<cr>", { desc = "Test run test under cursor (nearest test)" })
+map("n", "<leader>tl", "<cmd>TestLast<cr>", { desc = "Test run last test" })
+map("n", "<leader>tf", "<cmd>TestFile<cr>", { desc = "Test run tests in current file" })
+map("n", "<leader>ta", "<cmd>TestSuite<cr>", { desc = "Test run full test suite" })
+map("n", "<leader>tg", "<cmd>TestVisit<cr>", { desc = "Test go to last test file" })
 
 -- Editors modules
 --

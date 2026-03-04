@@ -35,6 +35,10 @@
       # url = "github:l4l/yofi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nirinit = {
+    #   url = "github:amaanq/nirinit";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs = {
@@ -82,6 +86,8 @@
             inputs.nur.modules.nixos.default
             # Tidy
             inputs.nixos-tidy.nixosModules.allow-unfree
+            # Niri plugin
+            # inputs.nirinit.nixosModules.nirinit
           ]
           ++ tidy_lib.getNixModules umport;
       };

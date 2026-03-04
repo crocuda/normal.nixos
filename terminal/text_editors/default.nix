@@ -11,6 +11,11 @@ with lib;
     || config.normal.editors.nvchad.enable
     || config.normal.editors.nvchad-ide.enable)
   {
+    # Ensure irectory for neovim servers RPC sockets.
+    systemd.tmpfiles.rules = [
+      "d /var/lib/nvim/servers 774 root users - -"
+    ];
+
     # Set default editor
     programs = {
       nano = {

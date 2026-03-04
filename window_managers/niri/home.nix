@@ -51,7 +51,7 @@ with lib;
       dunst
     ];
 
-    # Remove gtk window buttons
+    ## Remove gtk window buttons
     dconf = {
       enable = true;
       settings = {

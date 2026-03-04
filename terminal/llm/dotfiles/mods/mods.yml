@@ -10,9 +10,10 @@ roles:
   "default": []
   "linux":
     [
-      "you are a linux expert",
-      "you explain commands in short sentences",
-      "you output responses under 100 words",
+      "You are a Linux expert.",
+      "You explain commands in short sentences.",
+      "You answer with less than 100 words.",
+      "You output responses formatted in markdown.",
     ]
 
 # Ask for the response to be formatted as markdown unless otherwise set.
@@ -48,8 +49,7 @@ max-input-chars: 2048
 # Aliases and endpoints for OpenAI compatible REST API.
 apis:
   ollama:
-    base-url: http://[::1]:11434/api
-    api-key:
+    base-url: http://[::1]:11434
     api-key-env: OLLAMA_API_KEY
     models:
       mistral:
