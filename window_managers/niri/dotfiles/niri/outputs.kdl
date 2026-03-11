@@ -60,7 +60,8 @@ output "eDP-1" {
   }
 }
 /// TV
-output "HDMI-A-1" {
+// output "HDMI-A-1" {
+output "HDMI-B-1" {
   scale 2.2
   layout {
     // Col/Row
@@ -85,3 +86,32 @@ output "HDMI-A-1" {
     }
   }
 }
+
+// KB Tv
+output "Mars-Tech Corporation Smart TV    0x00000001" {
+  // Keep extra spaces in name
+  scale 1.2
+  layout {
+    // Col/Row
+    default-column-width {
+      proportion 0.5
+    }
+    preset-column-widths {
+      proportion 0.3
+      proportion 0.5
+      proportion 0.7
+      proportion 1.0
+    }
+    preset-window-heights {
+      proportion 0.5
+      proportion 1.0
+    }
+    struts {
+      top 10
+      left 40
+      right 20
+      bottom 30
+    }
+  }
+}
+
