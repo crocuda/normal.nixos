@@ -11,6 +11,8 @@ with lib;
       ".config/git/conventional_commit_message".source = ./dotfiles/conventional_commit_message;
     };
 
+    # Sem
+
     programs = {
       # Versionning
 
@@ -42,6 +44,7 @@ with lib;
             # pager = ["nvim" "-u" "~/.config/nvchad/init.lua" "-c" "DiffEditor $left $right $output"];
             pager = "less";
             paginate = "never";
+            show-cryptographtic-signatures = true; # performance cost for large change logs
           };
           aliases = {
             # Short history
@@ -49,10 +52,11 @@ with lib;
             ll = ["log" "--limit" "12"];
             diffshow = ["nvim" "-u" "~/.config/nvchad/init.lua" "-c" "DiffViewOpen"];
 
+            stt = ["diff" "--stat"];
+
             # Git wrapped commands
             push = ["git" "push"];
             fetch = ["git" "fetch"];
-            pull = ["git" "pull"];
           };
           # signing = {
           #   sign-all = true;
@@ -63,17 +67,29 @@ with lib;
           templates = {
             draft_commit_description = let
               hint = builtins.readFile ./dotfiles/conventional_change_message;
+              signature = ''
+                if(self.signature(),
+                  indent("JJ:     ",
+                    concat(
+                      self.signature().status(),
+                      self.signature().display(),
+                    ),
+                  ),
+                )
+              '';
+              changes = ''
+                concat(
+                  indent("JJ:     ", diff.stat(72)),
+                )
+              '';
             in ''
               concat(
+                ${signature},
                 description,
                 "${hint}",
                 surround(
-                  "\nJJ: This commit contains the following changes:\n", "",
-                  indent("JJ:     ", diff.stat(72))
-                ),
-                surround(
-                  "\nJJ: This commit contains the following changes:\n", "",
-                  indent("JJ:     ", diff.summary())
+                  "\nJJ: This commit contains the following changes:\n","",
+                  ${changes}
                 ),
               )
             '';

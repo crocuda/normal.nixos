@@ -166,6 +166,10 @@ vim.lsp.config("ltex", {
       },
     },
   },
+  filetypes = {
+    "markdown",
+    "typst",
+  },
 })
 vim.lsp.enable "ltex"
 

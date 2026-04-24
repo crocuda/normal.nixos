@@ -44,7 +44,7 @@ local options = {
     nix = { "alejandra" },
     zig = { "zigfmt" },
     hcl = { "hclfmt" },
-    sql = { "sqlfluff" },
+    sql = { "sqruff" },
 
     caddy = { "caddy" },
   },

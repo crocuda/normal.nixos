@@ -21,3 +21,6 @@ bind <i> tabnext
 
 unbind q
 bind q tabclose
+
+bind <C-f> fillcmdline find
+bind <h> findnext

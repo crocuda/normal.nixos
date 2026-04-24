@@ -105,6 +105,7 @@ map("v", "i", "l", { desc = "Motions move right" })
 -- insert
 map("n", "l", "i", { desc = "Motions insert under cursor" })
 map("n", "L", "I", { desc = "Motions insert under cursor" })
+map("n", "I", "", { desc = "Motions insert under cursor" })
 
 -- select
 map("n", "vi", "vl", { desc = "Motions select" })

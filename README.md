@@ -26,7 +26,7 @@ This project aims to provide a reasonable NixOs base configuration
 for desktops with:
 
 - Firefox - A custom firefox with security features.
-  - Tridactil (keyboard navigation)
+  - Tridactyl (keyboard navigation)
   - (+ i2p profile)
 - Searxng - A local search engine aggregator without metadata.
 
