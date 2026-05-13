@@ -13,6 +13,6 @@ with lib;
       # A local search engine that gather other search engine results.
       # It anonimise searches by removing cookies and special params.
       # Furthermore no metadata collection (trackers, blueprint..)
-      websurf
+      websurfx
     ];
   }

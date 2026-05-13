@@ -117,7 +117,7 @@ animations {
 }
 // Overview
 overview {
-    zoom 0.5
+    zoom 0.6
     workspace-shadow {
       off
     }
@@ -133,11 +133,22 @@ window-rule {
   draw-border-with-background false
   geometry-corner-radius 4.0
   clip-to-geometry true
+  opacity 0.96
+  background-effect {
+      blur true
+  }
 }
 window-rule {
   match is-active=false
   match is-focused=false
-  opacity 0.9
+  opacity 0.82
+}
+window-rule {
+  match is-floating=true
+  background-effect {
+      blur true
+      xray false
+  }
 }
 
 // Block out password managers from screencasts.
@@ -160,12 +171,16 @@ window-rule {
 window-rule {
   match app-id=r#"neovide"#
   // default-column-display "tabbed"
+  // open-maximized true
+  // open-focused true
 }
 window-rule {
   match app-id=r#"kitty"# title=r#"^nvim ~"# is-focused=true
 }
 window-rule {
-  match app-id=r#"kitty"# title=r#"^nvim ~"# is-focused=false
+  match app-id=r#"firefox"# title=r#"Youtube"# is-floating=true
+  default-column-width { proportion 0.3; }
+  default-window-height { proportion 0.66; }
 }
 
 include "./submap.kdl"

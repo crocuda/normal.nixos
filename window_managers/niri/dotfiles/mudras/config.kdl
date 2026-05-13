@@ -109,6 +109,16 @@ Super+g {
       - r#"niri msg action "toggle-overview""#
     }
   }
+  Ctrl+u {
+    @press {
+      - r#"niri msg action "toggle-window-floating""#
+    }
+  }
+  j {
+    @press {
+      - r#"niri msg action "switch-focus-between-floating-and-tiling""#
+    }
+  }
 
   // Exit the submap
   Super { 
@@ -180,6 +190,7 @@ Super+g {
       - r#"niri msg action "focus-column-right""#
     }
   }
+
 
   // Resize
   Shift_L+m {
@@ -265,12 +276,14 @@ Super+g {
 
 // Common utils
 brightness_up {
-  @press repeat=true { 
+  // @press repeat=true { 
+  @press { 
     - "light -A 10"
   }
 }
 brightness_down {
-  @press repeat=true { 
+  // @press repeat=true { 
+  @press { 
     - "light -U 10"
   }
 }

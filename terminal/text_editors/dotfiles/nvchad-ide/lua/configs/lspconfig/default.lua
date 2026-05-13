@@ -1,3 +1,6 @@
+-- Import vue-js config
+require "./vue.lua"
+
 local lspconfig = require "nvchad.configs.lspconfig"
 -- local on_attach = lspconfig.on_attach
 local on_init = lspconfig.on_init
@@ -64,51 +67,39 @@ end
 -- }
 
 -- support for vue
-vim.lsp.config("vue_ls", {
-  cmd = { "bun", "run", "vue-language-server", "--stdio" },
-  init_options = {
-    vue = {
-      hybridMode = true,
-    },
-  },
-  root_markers = { "vite.config.ts", "vitest.config.ts" },
-})
-vim.lsp.enable "vue_ls"
-
-vim.lsp.config("ts_ls", {
-  -- on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
-  cmd = { "bun", "run", "typescript-language-server", "--stdio" },
-  init_options = {
-    plugins = {
-      {
-        -- Before, install in bun global dir:
-        -- bun install -g @vue/typescript-plugin && bun update -g
-        name = "@vue/typescript-plugin",
-        location = "",
-        -- location = "$HOME/.bun/install/global/vue-language-server",
-        languages = { "vue" },
-      },
-      {
-        -- Before, install in bun global dir:
-        -- bun install -g @vue/language-plugin-pug && bun update -g
-        name = "@vue/language-plugin-pug",
-        location = "",
-        -- location = "$HOME/.bun/install/global/vue-language-server",
-        languages = { "vue" },
-      },
-    },
-  },
-  filetypes = {
-    "typescript",
-    "javascript",
-    "javascriptreact",
-    "typescriptreact",
-    "vue",
-  },
-})
-vim.lsp.enable "ts_ls"
+-- vim.lsp.config("vue_ls", {
+--   cmd = { "bun", "run", "vue-language-server", "--stdio" },
+--   init_options = {
+--     vue = {
+--       hybridMode = true,
+--     },
+--   },
+--   root_markers = { "vite.config.ts", "vitest.config.ts" },
+--   settings = {
+--     pug = {
+--       validate = true,
+--     },
+--     css = {
+--       validate = true,
+--       lint = {
+--         unknownAtRules = "ignore",
+--       },
+--     },
+--     scss = {
+--       validate = true,
+--       lint = {
+--         unknownAtRules = "ignore",
+--       },
+--     },
+--     less = {
+--       validate = true,
+--       lint = {
+--         unknownAtRules = "ignore",
+--       },
+--     },
+--   },
+-- })
+-- vim.lsp.enable "vue_ls"
 
 -- Pug
 -- Install pug lsp from go with: go install github.com/opa-oz/pug-lsp@latest
