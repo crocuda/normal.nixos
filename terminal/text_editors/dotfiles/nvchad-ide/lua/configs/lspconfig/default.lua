@@ -1,5 +1,5 @@
 -- Import vue-js config
-require "./vue.lua"
+require "configs.lspconfig.vue"
 
 local lspconfig = require "nvchad.configs.lspconfig"
 -- local on_attach = lspconfig.on_attach
@@ -58,48 +58,6 @@ for _, lsp in ipairs(servers) do
 
   vim.lsp.enable(lsp)
 end
-
--- lspconfig.eslint.setup {
---   on_attach = on_attach,
---   on_init = on_init,
---   capabilities = capabilities,
---   cmd = { "eslint" },
--- }
-
--- support for vue
--- vim.lsp.config("vue_ls", {
---   cmd = { "bun", "run", "vue-language-server", "--stdio" },
---   init_options = {
---     vue = {
---       hybridMode = true,
---     },
---   },
---   root_markers = { "vite.config.ts", "vitest.config.ts" },
---   settings = {
---     pug = {
---       validate = true,
---     },
---     css = {
---       validate = true,
---       lint = {
---         unknownAtRules = "ignore",
---       },
---     },
---     scss = {
---       validate = true,
---       lint = {
---         unknownAtRules = "ignore",
---       },
---     },
---     less = {
---       validate = true,
---       lint = {
---         unknownAtRules = "ignore",
---       },
---     },
---   },
--- })
--- vim.lsp.enable "vue_ls"
 
 -- Pug
 -- Install pug lsp from go with: go install github.com/opa-oz/pug-lsp@latest

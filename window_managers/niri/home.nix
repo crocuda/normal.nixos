@@ -44,7 +44,7 @@ with lib;
       inputs.yofi.packages.${system}.default
 
       # Wallpapers
-      swww
+      awww
       image_to_grayscale
 
       # notifications

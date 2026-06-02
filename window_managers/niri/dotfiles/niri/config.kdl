@@ -14,7 +14,7 @@ screenshot-path "~/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_niri.png"
 // StartUp
 spawn-at-startup "gammastep" "-P" "-O" "5500" "-b" "0.8:0.8"
 spawn-at-startup "dunst"
-spawn-at-startup "swww-daemon"
+spawn-at-startup "awww-daemon"
 
 // Keyboard 
 spawn-at-startup "mudras" "run"
@@ -124,7 +124,7 @@ overview {
 }
 // Put swaybg inside the overview backdrop.
 layer-rule {
-    match namespace="^swww-daemon$"
+    match namespace="^awww-daemon$"
     place-within-backdrop true
 }
 

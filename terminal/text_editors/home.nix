@@ -163,13 +163,9 @@ with lib;
             ##############################
             # Web
             prettierd
-            # nodePackages.prettier
-            # nodePackages.typescript
             typescript
-            # nodePackages.typescript-language-server
             typescript-language-server
 
-            # nodePackages.eslint
             eslint
 
             vue-language-server

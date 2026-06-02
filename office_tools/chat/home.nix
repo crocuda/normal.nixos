@@ -9,7 +9,7 @@ with lib;
   mkIf config.normal.chat.enable {
     home.packages = with pkgs; [
       # Mail client
-      thunderbird-bin
+      thunderbird
 
       # Messaging apps
       # session-desktop

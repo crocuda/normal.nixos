@@ -10,7 +10,7 @@ in
   with lib;
     mkIf (config.normal.wm.gnome.enable || config.normal.wm.niri.enable) {
       ## Screen
-      programs.light.enable = true;
+      hardware.acpilight.enable = true;
 
       ## Sound
       users.groups.audio.members = config.normal.users;
@@ -42,6 +42,8 @@ in
         # Audio - pactl audio control cli
         pulseaudio
         pamixer
+        ## Screen
+        brightnessctl
       ];
 
       ## Non blocking processes

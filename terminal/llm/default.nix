@@ -29,11 +29,10 @@ with lib;
     ];
 
     services.ollama = {
-      package = pkgs.ollama;
+      package = pkgs.ollama-cuda;
       enable = true;
       host = "[::1]"; #ipv6
       port = 11434; #default
-      acceleration = "cuda";
       # loadModels = ["mistral"];
       environmentVariables = {
         OLLAMA_LLM_LIBRARY = "cuda_v12";
