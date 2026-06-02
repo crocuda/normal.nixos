@@ -35,8 +35,11 @@ with lib;
         enable = true;
         package = pkgs.jujutsu;
         settings = {
-          git = {
-            auto-local-bookmark = true;
+          remotes = {
+            origin = {
+              auto-track-bookmarks = "*";
+              # auto-track-bookmarks = ["main" "master" "dev"];
+            };
           };
           ui = {
             editor = "nvim -u ~/.config/nvchad/init.lua";

@@ -2,7 +2,7 @@
 * Per output layout
 */
 
-/// Desktop
+/// Default desktop
 output "DP-2" {
   layout {
     // Col/Row
@@ -34,7 +34,39 @@ output "DP-2" {
     }
   }
 }
-/// Laptop
+/// Desktop
+output "Beihai Century Joint Innovation Technology Co.,Ltd PGM340 Unknown" {
+  layout {
+    // Col/Row
+    default-column-width {
+      proportion 0.3
+    }
+    // default-column-height {
+    //  proportion 0.66
+    // }
+    preset-column-widths {
+      proportion 0.2
+      proportion 0.3
+      proportion 0.5
+      proportion 0.65
+      proportion 0.85
+      proportion 1.0
+    }
+    preset-window-heights {
+      proportion 0.33
+      proportion 0.5
+      proportion 0.66
+      proportion 1.0
+    }
+    struts {
+      top 30
+      left 200
+      right 40
+      bottom 90
+    }
+  }
+}
+/// Default laptop
 output "eDP-1" {
   layout {
     // Col/Row
@@ -59,9 +91,10 @@ output "eDP-1" {
     }
   }
 }
-/// TV
-// output "HDMI-A-1" {
-output "HDMI-B-1" {
+
+// Tv
+// Keep extra spaces in name
+output "Samsung Electric Company SAMSUNG 0x01000E00" {
   scale 2.2
   layout {
     // Col/Row
@@ -86,10 +119,9 @@ output "HDMI-B-1" {
     }
   }
 }
-
 // KB Tv
+// Keep extra spaces in name
 output "Mars-Tech Corporation Smart TV    0x00000001" {
-  // Keep extra spaces in name
   scale 1.2
   layout {
     // Col/Row
