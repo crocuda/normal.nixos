@@ -6,10 +6,10 @@ default:
     - --server
     - "{{SOCKET_PATH}}"
   server-env:
-    - FOO=bar
+    - NVIM_APPNAME=nvchad-ide
 
 servers:
   deku:
     ssh-path: /urr/bin/env ssh
     nvim-cmd:
-      - /usr/bin/env nvim
+      - /usr/bin/env NVIM_APPNAME=nvchad-ide nvim

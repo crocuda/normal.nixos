@@ -63,7 +63,7 @@ with lib;
       ".config/nvim/lua".source = dotfiles/nvim/lua;
       ".config/nvim/init.lua".source = dotfiles/nvim/init.lua;
 
-      ".config/nvrh/config.yaml".source = dotfiles/nvrh/config.yaml;
+      ".config/nvrh/config.yml".source = dotfiles/nvrh/config.yml;
       # Less
       ".lesskey".source = dotfiles/.lesskey;
 
