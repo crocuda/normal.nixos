@@ -59,6 +59,11 @@
       pkgs-unstable = import nixpkgs-unstable;
       pkgs-deprecated = import nixpkgs-deprecated;
     };
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+    };
+
     umport = {
       paths = [
         ./.
@@ -111,5 +116,6 @@
           ++ tidy_lib.getHomeModules umport;
       };
     };
+    devShells.${pkgs.stdenv.hostPlatform.system}.default = pkgs.callPackage ./shell.nix {};
   };
 }

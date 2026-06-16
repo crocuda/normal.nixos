@@ -75,7 +75,7 @@ vim.lsp.config("tailwindcss", {
   capabilities = capabilities,
   filetypes = { "pug", "css", "html", "vue", "postcss", "markdown", "svelte", "handlebars", "mustache", "jade", "htmx" },
 })
-vim.lsp.enable "tailwindcss"
+-- vim.lsp.enable "tailwindcss"
 
 vim.lsp.config("denols", {
   -- on_attach = on_attach,

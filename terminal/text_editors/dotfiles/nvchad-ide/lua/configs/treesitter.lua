@@ -65,6 +65,6 @@ M.options = {
   },
 }
 
-require("nvim-treesitter.configs").setup(M.options)
+require("nvim-treesitter.config").setup(M.options)
 
 return M

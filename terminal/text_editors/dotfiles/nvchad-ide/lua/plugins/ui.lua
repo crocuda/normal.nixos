@@ -62,6 +62,7 @@ return {
   -- https://github.com/NvChad/NvChad/issues/646
   {
     "rmagatti/auto-session",
+    ---@module "auto-session"
     cmd = { "SaveSession", "RestoreSession" },
     config = function()
       -- Autosession compat
@@ -78,6 +79,9 @@ return {
         auto_session_suppress_dirs = nil,
         pre_save_cmds = { "tabdo NvimTreeClose" },
         post_restore_cmds = { "tabdo NvimTreeRefresh" },
+
+        -- Filtering
+        close_unsupported_windwows = true,
       }
     end,
     lazy = false,

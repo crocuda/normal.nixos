@@ -86,18 +86,6 @@ layout {
     draw-behind-window true
     color "#000000ff"
   }
-
-
-  /* 
-  * Not released
-  */
-  // blur {
-  //   off
-  //   passes 3
-  //   radius 12.0
-  //   noise 0.0
-  // }
-
 }
 
 

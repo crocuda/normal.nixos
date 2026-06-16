@@ -58,6 +58,13 @@ return {
   },
   -------------------------------
   -- Markdown viewer
+  -- {
+  --   "MeanderingProgrammer/render-markdown.nvim",
+  --   -- if you use standalone mini plugins
+  --   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
+  --   opts = {},
+  --   lazy = true,
+  -- },
   {
     "OXY2DEV/markview.nvim",
     lazy = false, -- Recommended
@@ -67,7 +74,8 @@ return {
       -- parsers manually
       -- Or if the parsers are in your $RUNTIMEPATH
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      "nvim-mini/mini.icons",
+      -- "nvim-tree/nvim-web-devicons",
     },
     -------------------------------
     -- CSV viewer
