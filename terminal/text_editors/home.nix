@@ -62,6 +62,8 @@ with lib;
       # Neovim
       ".config/nvim/lua".source = dotfiles/nvim/lua;
       ".config/nvim/init.lua".source = dotfiles/nvim/init.lua;
+
+      ".config/nvrh/config.yaml".source = dotfiles/nvrh/config.yaml;
       # Less
       ".lesskey".source = dotfiles/.lesskey;
 

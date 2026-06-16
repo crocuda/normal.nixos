@@ -28,6 +28,7 @@ with lib;
 
     # Add essential developer packages
     environment.systemPackages = with pkgs; [
+      nvrh
       # Minimal text editor
       vim
       # neovim as IDE

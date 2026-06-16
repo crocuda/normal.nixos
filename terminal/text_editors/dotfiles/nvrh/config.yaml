@@ -1,0 +1,15 @@
+default:
+  ssh-path: internal
+  local-editor:
+    - neovide
+    - --nofork
+    - --server
+    - "{{SOCKET_PATH}}"
+  server-env:
+    - FOO=bar
+
+servers:
+  deku:
+    ssh-path: /urr/bin/env ssh
+    nvim-cmd:
+      - /usr/bin/env nvim

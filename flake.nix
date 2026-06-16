@@ -74,6 +74,7 @@
 
         ./flake.nix
         ./default.nix
+        ./shell.nix
 
         # A standalone flake
         ./keyboard/zmk_config
