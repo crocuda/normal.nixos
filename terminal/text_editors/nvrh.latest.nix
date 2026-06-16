@@ -7,13 +7,26 @@ with lib;
 with pkgs;
   buildGoModule rec {
     pname = "nvrh";
-    version = "0.9.0";
+    version = "v0.9.0";
 
     src = fetchFromGitHub {
       owner = "mikew";
       repo = "nvrh";
-      tag = version;
-      sha256 = lib.fakeSha256;
-      # sha256 = "sha256-t43xXUzXoj0Fxrt/BZaBP1fua2W8HPd1x9bsTV0uUD4=";
+      # tag = "v${version}";
+      rev = "main";
+      # hash = lib.fakeHash;
+      hash = "sha256-aIL+ct5qd54UhETynHkVsr1D25nokOGXICzoHq2b9so=";
     };
+    # vendorHash = lib.fakeHash;
+    vendorHash = "sha256-Pm207AkPPC/5mNqlpq3X5IZcTaNNqFSh98WlCj/Vq/g=";
+    preBuild = ''
+      cp package.json src/
+    '';
+    ldflags = [
+      "-s"
+      "-w"
+    ];
+    postInstall = ''
+      mv $out/bin/src $out/bin/nvrh
+    '';
   }
