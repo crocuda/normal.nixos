@@ -81,6 +81,7 @@
 
         # package derivations (imported by other means)
         ./window_managers/niri/niri.latest.nix
+        ./terminal/text_editors/nvrh.latest.nix
       ];
     };
   in {

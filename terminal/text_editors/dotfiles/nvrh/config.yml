@@ -1,15 +1,15 @@
 default:
   ssh-path: internal
+
   local-editor:
     - neovide
-    - --nofork
     - --server
     - "{{SOCKET_PATH}}"
+
   server-env:
     - NVIM_APPNAME=nvchad-ide
 
 servers:
   deku:
-    ssh-path: /urr/bin/env ssh
     nvim-cmd:
-      - /usr/bin/env NVIM_APPNAME=nvchad-ide nvim
+      - NVIM_APPNAME=nvchad-ide /usr/bin/env nvim
