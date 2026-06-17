@@ -4,7 +4,7 @@
   ...
 }:
 with lib; {
-  normal.searxng = {
+  normal.browser.searxng = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         ## Search engine

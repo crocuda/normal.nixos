@@ -1,6 +1,6 @@
 {lib, ...}:
 with lib; {
-  normal.websurf = {
+  normal.browser.websurf = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         ## Search engine

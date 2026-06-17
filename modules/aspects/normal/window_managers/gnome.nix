@@ -1,8 +1,12 @@
-{lib, ...}:
+{
+  lib,
+  normal,
+  ...
+}:
 with lib; {
-  normal.gnome = {
+  normal.wm.gnome = {
     includes = [
-      den.aspect.window_manager
+      normal.wm.base
     ];
     nixos = {pkgs, ...}: {
       services.gnome.gnome-settings-daemon.enable = true;

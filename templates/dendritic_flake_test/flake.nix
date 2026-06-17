@@ -2,7 +2,7 @@
   description = "A dendritic flake that uses normal.nixos";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     normal.url = "github:pipelight/normal.nixos?ref=dev";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
@@ -28,7 +28,13 @@
               ../commons/configuration.nix
               ../commons/hardware-configuration.nix
 
+              # Denful
               inputs.normal.denful.normal
+              ({normal, ...}: {
+                den.aspects.laptop.includes = [
+                  normal.git
+                ];
+              })
 
               ###################################
               # You may move this module into its own file.

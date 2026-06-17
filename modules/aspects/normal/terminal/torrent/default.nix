@@ -1,5 +1,10 @@
 {lib, ...}:
 with lib; {
+  flake-file.inputs = {
+    # Torrent
+    rustmission.url = "github:intuis/rustmission";
+  };
+
   normal.torrent = {
     nixos = {pkgs, ...}: {
       ################################

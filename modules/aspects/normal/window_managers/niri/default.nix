@@ -1,5 +1,24 @@
-{config, ...}: {
-  normal.niri = {
+{
+  lib,
+  config,
+  normal,
+  ...
+}:
+with lib; {
+  flake-file.inputs = {
+    mudras.url = "github:pipelight/mudras?ref=dev";
+    # Window Manager
+    yofi = {
+      url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
+      # url = "github:l4l/yofi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  normal.wm.niri = {
+    includes = [
+      normal.wm.base
+    ];
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; let
         system = stdenv.hostPlatform.system;

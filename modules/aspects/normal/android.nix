@@ -1,8 +1,7 @@
 ################################
 ## Android
 # This module enable compatibility for devices under GrapheneOs.
-{lib, ...}:
-with lib; {
+{...}: {
   normal.android = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [

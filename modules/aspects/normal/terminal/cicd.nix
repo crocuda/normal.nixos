@@ -1,11 +1,10 @@
 {
   lib,
   inputs,
-  normal,
   ...
 }:
 with lib; {
-  normal.cicd = {
+  normal.terminal.cicd = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; let
         system = stdenv.hostPlatform.system;

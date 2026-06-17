@@ -1,7 +1,19 @@
-{lib, ...}:
+{
+  lib,
+  inputs,
+  ...
+}:
 with lib; {
-  normal.firefox = {
+  flake-file.inputs = {
+    ## Browser
+    # NUR - Nix User Repository
+    nur.url = "github:nix-community/NUR";
+    arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+  };
+
+  normal.browser.firefox = {
     nixos = {pkgs, ...}: {
+      imports = [inputs.arkenfox.nixosModules.default];
       programs.firefox = {
         # package = pkgs.librewolf;
         enable = true;
@@ -76,6 +88,7 @@ with lib; {
         };
       };
       homeManager = {pkgs, ...}: {
+        imports = [inputs.arkenfox.homeModules.default];
         home.file = {
           # ".config/keepassxc/keepassxc.ini".source = dotfiles/keepassxc/keepassxc.ini;
 

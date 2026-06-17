@@ -4,7 +4,7 @@
   ...
 }:
 with lib; {
-  normal.window_manager = {
+  normal.wm.base = {
     nixos = {pkgs, ...}: {
       ## Init scripts
       programs = {

@@ -1,21 +1,21 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
-  flake-file.inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-file.url = "github:denful/flake-file";
-    den.url = "github:denful/den";
-  };
-
+{inputs, ...}: {
   imports = [
     (inputs.flake-file.flakeModules.dendritic or {})
     (inputs.den.flakeModules.dendritic or {})
   ];
+  flake-file.inputs = {
+    den.url = "github:denful/den";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    flake-file.url = "github:denful/flake-file";
+    import-tree.url = "github:denful/import-tree";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }
