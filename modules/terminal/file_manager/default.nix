@@ -7,48 +7,54 @@
 }:
 with lib;
   mkIf config.normal.terminal.file_manager.enable {
-    users.groups = {
-      storage.members = config.normal.users;
-    };
-
     # Allow unfree software
-    allow-unfree = [
-      "unrar"
-    ];
+    # allow-unfree = [
+    #   "unrar"
+    # ];
+    den.aspects.file_manager = {
+      includes = [
+        (den.batteries.unfree ["unrar"])
+      ];
+      nixos = {pkgs, ...}: {
+        environment.systemPackages = with pkgs; [
+          # Archive
+          unzip
 
-    environment.systemPackages = with pkgs; [
-      # Archive
-      unzip
+          #File management
+          rsync
 
-      #File management
-      rsync
+          # For bsdtar
+          libarchive
 
-      # For bsdtar
-      libarchive
+          unrar
+          dust
 
-      unrar
-      dust
+          udevil
+        ];
 
-      udevil
-    ];
+        users.groups = {
+          storage.members = config.normal.users;
+        };
 
-    # programs.udevil.enable = true; #unstable do not use yet
-    services.devmon.enable = true; #not customisable
-    services.gvfs.enable = true;
-    services.udisks2.enable = true;
+        # programs.udevil.enable = true; #unstable do not use yet
+        services.devmon.enable = true; #not customisable
+        services.gvfs.enable = true;
+        services.udisks2.enable = true;
 
-    ################################
-    ## Disk automount
-    # ntfs_defaults=uid=$UID,gid=$GID,prealloc
-    environment.etc."udisks2/mount_options.conf".text = ''
-      [defaults]
-      btrfs_defaults=compress=zstd
-      ntfs_defaults=uid=$UID,gid=$GID
-    '';
-    # Ignore btrfs RAID disks
-    services.udev.extraRules = ''
-      ENV{ID_FS_LABEL}=="RAID",\
-      ENV{ID_FS_TYPE}=="btrfs",\
-      ENV{UDISKS_IGNORE}="1"
-    '';
+        ################################
+        ## Disk automount
+        # ntfs_defaults=uid=$UID,gid=$GID,prealloc
+        environment.etc."udisks2/mount_options.conf".text = ''
+          [defaults]
+          btrfs_defaults=compress=zstd
+          ntfs_defaults=uid=$UID,gid=$GID
+        '';
+        # Ignore btrfs RAID disks
+        services.udev.extraRules = ''
+          ENV{ID_FS_LABEL}=="RAID",\
+          ENV{ID_FS_TYPE}=="btrfs",\
+          ENV{UDISKS_IGNORE}="1"
+        '';
+      };
+    };
   }

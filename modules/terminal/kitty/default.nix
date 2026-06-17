@@ -1,5 +1,35 @@
-{pkgs, ...}: {
-  systemd.user.tmpfiles.rules = [
-    "L+ %h/.config/kitty/current-theme.conf - - - - %h/.config/kitty/themes/doom_chad.conf"
-  ];
+{
+  pkgs,
+  lib,
+  ...
+}:
+with lib; {
+  den.aspects.kitty = {
+    nixos = {pkgs, ...}: {
+      systemd.user.tmpfiles.rules = [
+        "L+ %h/.config/kitty/current-theme.conf - - - - %h/.config/kitty/themes/doom_chad.conf"
+      ];
+    };
+
+    homeManager = {pkgs, ...}: {
+      home.file = {
+        ".config/kitty/themes/github_dark_dimmed.conf".source = dotfiles/kitty/github_dark_dimmed.conf;
+        ".config/kitty/themes/doom_chad.conf".source = dotfiles/kitty/doom_chad.conf;
+        ".config/kitty/themes/doom_hub.conf".source = dotfiles/kitty/doom_hub.conf;
+      };
+      # Terminal
+      programs = {
+        kitty = {
+          enable = true;
+          extraConfig = mkMerge [
+            (builtins.readFile dotfiles/kitty/kitty.conf)
+            (mkIf config.normal.font.enable ''
+              map ctrl+j change_font_size ${toString (config.normal.font.size)}
+              font_size ${toString (config.normal.font.size)}
+            '')
+          ];
+        };
+      };
+    };
+  };
 }
