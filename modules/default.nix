@@ -11,6 +11,7 @@
   den.default.includes = [
     den.batteries.inputs'
     den.batteries.self'
+    den.batteries.home-manager
   ];
 
   # Enable HM by default

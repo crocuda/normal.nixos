@@ -1,0 +1,88 @@
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  kill_all_sessions = pkgs.writeShellScriptBin "kill_all_sessions" ''
+    fn() {
+      ${pkgs.procps}/bin/ps aux | egrep '(tty|pts)' | xargs kill -KILL
+    }
+    fn
+  '';
+  mount_cryptstorage = pkgs.writeShellScriptBin "mount_cryptstorage" ''
+    fn() {
+      sudo mkdir -p /run/media/HDD
+      sudo ${pkgs.systemd}/bin/systemd-cryptsetup attach cryptstorage /dev/disk/by-label/CRYPTSTORAGE
+      sudo ${pkgs.util-linux}/bin/mount /dev/mapper/cryptstorage /run/media/HDD
+    }
+    fn
+  '';
+  umount_cryptstorage = pkgs.writeShellScriptBin "umount_cryptstorage" ''
+    fn() {
+      sudo ${pkgs.util-linux}/bin/umount /run/media/HDD
+      sudo ${pkgs.systemd}/bin/systemd-cryptsetup detach cryptstorage
+    }
+    fn
+  '';
+in
+  with lib; {
+    normal.yubikey = {
+      nixos = {pkgs, ...}: {
+        boot.initrd.luks.yubikeySupport = true;
+
+        ##########################
+        # On yubikey unplug:
+        # - unmount disks
+        # - kill user sessions
+        systemd.services."kill_all_sessions" = {
+          enable = true;
+          description = "Kill all running sessions";
+          serviceConfig = {
+            ExecStart = "${kill_all_sessions}/bin/kill_all_sessions";
+          };
+        };
+        services.udev.extraRules = ''
+          ACTION=="remove",\
+          ENV{SUBSYSTEM}=="usb",\
+          ENV{PRODUCT}=="1050/407/543",\
+          RUN+="${umount_cryptstorage}/bin/umount_cryptstorage",\
+          RUN+="${pkgs.systemd}/bin/systemctl start kill_all_sessions",\
+        '';
+
+        environment.systemPackages = with pkgs; [
+          # Yubikey
+          yubikey-manager
+          yubikey-personalization
+          yubico-pam
+          yubico-piv-tool
+
+          usbutils
+          procps
+          kill_all_sessions
+
+          mount_cryptstorage
+          umount_cryptstorage
+        ];
+
+        services.udev.packages = with pkgs; [
+          yubikey-personalization
+          procps
+          gnugrep
+        ];
+        services.pcscd.enable = true;
+
+        ##########################
+        # Unused
+
+        # security.pam.services = {
+        #   login.u2fAuth = true;
+        #   sudo.u2fAuth = true;
+        # };
+
+        # programs.gnupg.agent = {
+        #   enable = true;
+        #   enableSSHSupport = true;
+        # };
+      };
+    };
+  }
