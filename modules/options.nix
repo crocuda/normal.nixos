@@ -1,8 +1,8 @@
 {
+  inputs,
   config,
   lib,
   utils,
-  inputs,
   ...
 }: let
   moduleName = "normal";

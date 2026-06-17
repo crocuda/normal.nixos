@@ -1,0 +1,27 @@
+{inputs, ...}: {
+  flake-file.inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+  systems =
+    inputs.flake-utils.lib.allSystems;
+  perSystem = {
+    config,
+    self,
+    inputs,
+    pkgs,
+    system,
+    ...
+  }: {
+    devShells.default = pkgs.mkShell {
+      packages = with pkgs; [
+        sops
+        age
+        ssh-to-age # ed25519 to age
+      ];
+      shellHook = ''
+        git fetch
+        export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/me);
+      '';
+    };
+  };
+}

@@ -13,6 +13,10 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-deprecated.url = "github:nixos/nixpkgs/nixos-25.11";
 
+    ## Dendritic
+    den.url = "github:denful/den";
+    import-tree.url = "github:vic/import-tree";
+
     ###################################
     ## normal.nixos dependencies
     nixos-tidy = {

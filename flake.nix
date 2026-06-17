@@ -3,7 +3,8 @@
 {
   description = "normal.nixos - NixOS configuration modules for desktops (and paranoids and hypochondriacs)";
 
-  outputs = inputs:
+  outputs =
+    inputs:
     (inputs.nixpkgs.lib.evalModules {
       specialArgs = {
         inherit inputs;
@@ -14,10 +15,11 @@
         ./flake-file.nix
       ];
     }).config.outputs
-    inputs;
+      inputs;
 
   inputs = {
     arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
+    den.url = "github:denful/den";
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
@@ -25,6 +27,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    import-tree.url = "github:vic/import-tree";
     mudras.url = "github:pipelight/mudras?ref=dev";
     nixos-tidy = {
       url = "github:pipelight/nixos-tidy?ref=dev";
