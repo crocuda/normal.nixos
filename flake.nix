@@ -1,9 +1,10 @@
 # DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } ./modules;
 
   inputs = {
+    arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
     den.url = "github:denful/den";
     flake-file.url = "github:denful/flake-file";
     flake-parts = {
@@ -18,6 +19,7 @@
     import-tree.url = "github:denful/import-tree";
     mudras.url = "github:pipelight/mudras?ref=dev";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
+    nur.url = "github:nix-community/NUR";
     rustmission.url = "github:intuis/rustmission";
     yofi = {
       url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
