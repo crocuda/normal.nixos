@@ -1,0 +1,16 @@
+default:
+  ssh-path: ssh
+
+  local-editor:
+    - neovide
+    - --server
+    - "{{SOCKET_PATH}}"
+
+  server-env:
+    - NVIM_APPNAME=nvchad-ide
+
+servers:
+  deku:
+    nvim-cmd:
+      - nvim
+      - +AutoSession restore

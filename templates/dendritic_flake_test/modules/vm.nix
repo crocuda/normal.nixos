@@ -7,7 +7,7 @@
   ...
 }: {
   # USER TODO: remove this tty-autologin used for the VM
-  den.aspects.default.includes = [(den.batteries.tty-autologin "tux")];
+  den.aspects.default.includes = [(den.batteries.tty-autologin "anon")];
 
   perSystem = {pkgs, ...}: {
     packages.vm = pkgs.writeShellApplication {
