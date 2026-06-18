@@ -14,7 +14,7 @@
   den.aspects.default = {
     includes = [
       den.batteries.hostname
-      normal.git
+      # normal.git
     ];
     nixos = {pkgs, ...}: {
       environment.systemPackages = [
@@ -28,6 +28,12 @@
       den.batteries.define-user
       den.batteries.primary-user
     ];
+    # nixos = {user, ...}: {
+    #   users.users."${user.userName}" = {
+    #     isNormalUser = true;
+    #     initialPassword = "anon";
+    #   };
+    # };
     homeManager = {pkgs, ...}: {
       home.packages = [pkgs.vim];
     };
