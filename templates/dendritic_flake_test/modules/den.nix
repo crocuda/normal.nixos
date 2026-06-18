@@ -5,7 +5,12 @@
   lib,
   ...
 }: {
-  imports = [inputs.den.flakeModule];
+  imports = [
+    inputs.den.flakeModule
+    # inputs.normal.denful.normal
+    (inputs.den.namespace "normal" inputs.normal)
+    # inputs.normal.flakeModule
+  ];
 
   den.schema.user.classes = lib.mkDefault ["homeManager"];
 
@@ -14,7 +19,7 @@
   den.aspects.default = {
     includes = [
       den.batteries.hostname
-      # normal.git
+      normal.android
     ];
     nixos = {pkgs, ...}: {
       environment.systemPackages = [

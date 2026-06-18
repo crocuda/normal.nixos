@@ -13,5 +13,8 @@
     normal.url = "github:pipelight/normal.nixos?ref=dev";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {
+      inherit inputs;
+    } (inputs.import-tree ./modules);
 }
