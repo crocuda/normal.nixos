@@ -7,5 +7,5 @@
   imports = [
     (inputs.den.namespace "normal" true)
   ];
-  _module.args.__findFile = den.lib.__findFile;
+  # _module.args.__findFile = den.lib.__findFile;
 }

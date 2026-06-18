@@ -1,6 +1,7 @@
 # flake.lock
 result*
 .direnv/
+*.qcow2
 
 # Ci/Cd
 .pipelight/
