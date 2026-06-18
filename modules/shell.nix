@@ -1,9 +1,9 @@
-{inputs, ...}: {
-  flake-file.inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-  };
-  systems =
-    inputs.flake-utils.lib.allSystems;
+{
+  lib,
+  inputs,
+  ...
+}: {
+  systems = lib.mkDefault lib.systems.flakeExposed;
   perSystem = {
     self,
     inputs,

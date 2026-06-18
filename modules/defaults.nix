@@ -9,8 +9,8 @@
   den.default.homeManager.home.stateVersion = "25.11";
 
   den.default.includes = [
-    # den.batteries.inputs'
-    # den.batteries.self'
+    den.batteries.inputs'
+    den.batteries.self'
   ];
 
   # Enable HM by default

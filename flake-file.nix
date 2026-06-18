@@ -11,7 +11,6 @@
       url = "github:hercules-ci/flake-parts";
     };
     # nixpkgs-lib.follows = "nixpkgs";
-    flake-utils.url = "github:numtide/flake-utils";
 
     ###################################
     ## NixOs pkgs
