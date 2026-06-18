@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   normal.bluetooth = {
     nixos = {pkgs, ...}: {
       ##########################
@@ -33,9 +33,9 @@
         enable = true;
       };
 
-      users.groups = {
-        bluetooth.members = config.normal.users;
-      };
+      # users.groups = {
+      #   bluetooth.members = config.normal.users;
+      # };
       # systemd.tmpfiles.rules = [
       #   "d /var/lib/bluetooth 700 root root - -"
       # ];

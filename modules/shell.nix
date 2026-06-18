@@ -5,7 +5,6 @@
   systems =
     inputs.flake-utils.lib.allSystems;
   perSystem = {
-    config,
     self,
     inputs,
     pkgs,

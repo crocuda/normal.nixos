@@ -1,5 +1,4 @@
 {
-  config,
   normal,
   lib,
   ...
@@ -109,7 +108,7 @@
           wls = false;
           srgb = false;
           font = let
-            cfg = config.normal;
+            #   cfg = config.normal;
           in {
             normal = [
               "JetBrainsMono Nerd Font Mono"
@@ -117,10 +116,10 @@
               "Noto Sans Mono CJK JP"
               "Noto Color Emoji"
             ];
-            size =
-              if cfg.font.enable
-              then (cfg.font.size - 0.2)
-              else 10.8;
+            # size =
+            #   if cfg.font.enable
+            #   then (cfg.font.size - 0.2)
+            #   else 10.8;
           };
         };
       };

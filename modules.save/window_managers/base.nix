@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{lib, ...}:
 with lib; {
   normal.wm.base = {
     nixos = {pkgs, ...}: {

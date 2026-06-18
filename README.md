@@ -1,8 +1,6 @@
 # normal.nixos - A banal desktop config.
 
-A set of **nixos modules** which provide reasonable configuration
-for desktop.
-
+A set of **nixos modules** which provide reasonable configuration for desktop.
 Still for **paranoids** and **hypochondriacs**.
 
 <img src="./public/images/normal.nixos.png" width="500px"/>
@@ -59,7 +57,8 @@ inputs = {
   normal = {
       url = "github:pipelight/normal.nixos";
   };
-};
+}
+
 ```
 
 Add the module to your system configuration.
@@ -75,7 +74,8 @@ nixosConfigurations = {
         ./normal.nix
     ];
   };
-};
+}
+
 ```
 
 See `option.nix` for available options.
