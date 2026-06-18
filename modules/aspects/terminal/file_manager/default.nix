@@ -1,4 +1,9 @@
-{lib, ...}:
+{
+  lib,
+  den,
+  # config,
+  ...
+}:
 with lib; {
   normal.terminal.file_manager = {
     includes = [
@@ -21,9 +26,9 @@ with lib; {
         udevil
       ];
 
-      users.groups = {
-        storage.members = config.normal.users;
-      };
+      # users.groups = {
+      #   storage.members = config.normal.users;
+      # };
 
       # programs.udevil.enable = true; #unstable do not use yet
       services.devmon.enable = true; #not customisable

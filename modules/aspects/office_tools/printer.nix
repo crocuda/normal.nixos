@@ -4,7 +4,7 @@
 # Support only Epson backend but can be extended if requested.
 {lib, ...}:
 with lib; {
-  normal.printers = {
+  normal.office.printers = {
     includes = [
       # Allow unfree software
       (den.batteries.unfree [

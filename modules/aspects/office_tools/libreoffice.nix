@@ -1,6 +1,6 @@
 {lib, ...}:
 with lib; {
-  normal.libreoffice = {
+  normal.office.libreoffice = {
     homeManager = {pkgs, ...}: {
       home.packages = with pkgs; [
         libreoffice
