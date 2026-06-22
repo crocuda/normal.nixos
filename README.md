@@ -1,5 +1,7 @@
 # normal.nixos - A banal desktop config.
 
+**Now with the den framework as a dendritic nixos configuration.**
+
 A set of **nixos modules** which provide reasonable configuration for desktop.
 Still for **paranoids** and **hypochondriacs**.
 
@@ -10,6 +12,14 @@ These are my public dots.
 I do not recommand installing
 as everything is largely opinionated
 and still moving.
+
+## Developers
+
+Whenever you need to refresh flake inputs (flake-files).
+
+```nix
+nix run #write-flake
+```
 
 ## Modules
 
