@@ -7,9 +7,9 @@
 }: {
   imports = [
     inputs.den.flakeModule
-    # inputs.normal.denful.normal
-    (inputs.den.namespace "normal" inputs.normal)
-    # inputs.normal.flakeModule
+    # (inputs.den.namespace "normal" inputs.normal)
+    # OR
+    inputs.normal.flakeModules.default
   ];
 
   den.schema.user.classes = lib.mkDefault ["homeManager"];

@@ -7,7 +7,7 @@
     system,
     ...
   }: {
-    devShells.default = pkgs.mkShell {
+    devShells.default = lib.mkDefault (pkgs.mkShell {
       packages = with pkgs; [
         sops
         age
@@ -17,6 +17,6 @@
         git fetch
         export SOPS_AGE_KEY=$(ssh-to-age -private-key -i ~/.ssh/me);
       '';
-    };
+    });
   };
 }
