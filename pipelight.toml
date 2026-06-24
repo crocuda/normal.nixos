@@ -25,7 +25,7 @@ commands = [
   # Build flake
   """
   nix run \
-  --flake './templates/dendritic_flake_test#vm' \
+  './templates/dendritic_flake_test#vm' \
   --override-input normal ./
   """,
 ]

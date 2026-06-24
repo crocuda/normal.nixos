@@ -1,3 +1,4 @@
+# Normal shell
 {lib, ...}: {
   systems = lib.mkDefault lib.systems.flakeExposed;
   perSystem = {
