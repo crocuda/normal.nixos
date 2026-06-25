@@ -3,7 +3,7 @@ local M = {}
 
 -- nvim-dbee fix
 M.enable_tree_sitter = function(data)
-	vim.cmd("TSEnable highlight")
+  vim.cmd "TSEnable highlight"
 end
 -- vim.api.nvim_create_autocmd("BufNewFile", { callback = M.enable_tree_sitter })
 -- vim.api.nvim_create_autocmd("BufReadPre", { callback = M.enable_tree_sitter })
@@ -11,60 +11,60 @@ end
 -- vim.api.nvim_create_autocmd("FilterReadPre", { callback = M.enable_tree_sitter })
 
 M.options = {
-	ensure_installed = {
+  ensure_installed = {
 
-		-- usual
-		"vim",
-		"vimdoc",
-		"bash",
-		"lua",
-		"nix",
+    -- usual
+    "vim",
+    "vimdoc",
+    "bash",
+    "lua",
+    "nix",
 
-		--database
-		"sql",
+    --database
+    "sql",
 
-		-- markup
-		"toml",
-		"yaml",
-		"jq",
-		"xml",
-		"csv",
-		"markdown",
-		-- "markdown_inline",
+    -- markup
+    "toml",
+    "yaml",
+    "jq",
+    "xml",
+    "csv",
+    "markdown",
+    -- "markdown_inline",
 
-		-- builder
-		"go",
-		"zig",
-		"rust",
-		"c",
-		"r",
-		"rnoweb",
+    -- builder
+    "go",
+    "zig",
+    "rust",
+    "c",
+    "r",
+    "rnoweb",
 
-		-- web
-		"vue",
-		"javascript",
-		"typescript",
-		"css",
-		"scss",
-		"pug",
-		"html",
+    -- web
+    "vue",
+    "javascript",
+    "typescript",
+    "css",
+    "scss",
+    "pug",
+    "html",
 
-		"caddy",
+    "caddy",
 
-		"yuck",
-	},
-	highlight = {
-		enable = true,
-		use_languagetree = true,
-	},
-	indent = {
-		enable = true,
-	},
-	incremental_selection = {
-		enable = true,
-	},
+    "yuck",
+  },
+  highlight = {
+    enable = true,
+    use_languagetree = true,
+  },
+  indent = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+  },
 }
 
-require("nvim-treesitter.configs").setup(M.options)
+require("nvim-treesitter.config").setup(M.options)
 
 return M

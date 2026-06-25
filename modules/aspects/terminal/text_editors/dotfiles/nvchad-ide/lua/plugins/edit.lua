@@ -1,0 +1,26 @@
+return {
+  {
+    -- Bulk find and replace utility
+    "MagicDuck/grug-far.nvim",
+    lazy = false,
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
+    config = function()
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require("grug-far").setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+      }
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
+}

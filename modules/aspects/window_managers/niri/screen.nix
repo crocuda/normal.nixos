@@ -19,4 +19,9 @@
       };
     };
   };
+  normal.batteries.screenSize = size: {
+    nixos = {lib, ...}: {
+      config.normal.wm.niri.screen = size;
+    };
+  };
 }
