@@ -1,7 +1,17 @@
-{lib, ...}:
-with lib; {
+{...}: {
+  flake-file.inputs = {
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
   normal.browser.searxng = {
-    nixos = {pkgs, ...}: {
+    nixos = {
+      pkgs,
+      config,
+      lib,
+      ...
+    }: {
       environment.systemPackages = with pkgs; [
         ## Search engine
         # A local search engine that gather other search engine results.

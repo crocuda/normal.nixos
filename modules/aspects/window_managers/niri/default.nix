@@ -27,7 +27,7 @@ with lib; {
         system = stdenv.hostPlatform.system;
       in [
         ## Window manager
-        pkgs-unstable.niri
+        niri
         xwayland-satellite
         ## Niri plugin
         # inputs.nirinit.packages.${system}.default

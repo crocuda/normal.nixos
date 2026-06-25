@@ -1,33 +1,33 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
-  kill_all_sessions = pkgs.writeShellScriptBin "kill_all_sessions" ''
-    fn() {
-      ${pkgs.procps}/bin/ps aux | egrep '(tty|pts)' | xargs kill -KILL
-    }
-    fn
-  '';
-  mount_cryptstorage = pkgs.writeShellScriptBin "mount_cryptstorage" ''
-    fn() {
-      sudo mkdir -p /run/media/HDD
-      sudo ${pkgs.systemd}/bin/systemd-cryptsetup attach cryptstorage /dev/disk/by-label/CRYPTSTORAGE
-      sudo ${pkgs.util-linux}/bin/mount /dev/mapper/cryptstorage /run/media/HDD
-    }
-    fn
-  '';
-  umount_cryptstorage = pkgs.writeShellScriptBin "umount_cryptstorage" ''
-    fn() {
-      sudo ${pkgs.util-linux}/bin/umount /run/media/HDD
-      sudo ${pkgs.systemd}/bin/systemd-cryptsetup detach cryptstorage
-    }
-    fn
-  '';
-in
-  with lib; {
-    normal.yubikey = {
-      nixos = {pkgs, ...}: {
+{...}: {
+  normal.yubikey = {
+    nixos = {
+      pkgs,
+      lib,
+      ...
+    }:
+      with lib; let
+        kill_all_sessions = pkgs.writeShellScriptBin "kill_all_sessions" ''
+          fn() {
+            ${pkgs.procps}/bin/ps aux | egrep '(tty|pts)' | xargs kill -KILL
+          }
+          fn
+        '';
+        mount_cryptstorage = pkgs.writeShellScriptBin "mount_cryptstorage" ''
+          fn() {
+            sudo mkdir -p /run/media/HDD
+            sudo ${pkgs.systemd}/bin/systemd-cryptsetup attach cryptstorage /dev/disk/by-label/CRYPTSTORAGE
+            sudo ${pkgs.util-linux}/bin/mount /dev/mapper/cryptstorage /run/media/HDD
+          }
+          fn
+        '';
+        umount_cryptstorage = pkgs.writeShellScriptBin "umount_cryptstorage" ''
+          fn() {
+            sudo ${pkgs.util-linux}/bin/umount /run/media/HDD
+            sudo ${pkgs.systemd}/bin/systemd-cryptsetup detach cryptstorage
+          }
+          fn
+        '';
+      in {
         boot.initrd.luks.yubikeySupport = true;
 
         ##########################
@@ -72,7 +72,7 @@ in
         services.pcscd.enable = true;
 
         ##########################
-        # Unused
+        # Unused: should deprec?
 
         # security.pam.services = {
         #   login.u2fAuth = true;
@@ -84,5 +84,5 @@ in
         #   enableSSHSupport = true;
         # };
       };
-    };
-  }
+  };
+}
