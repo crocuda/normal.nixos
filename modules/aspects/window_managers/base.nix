@@ -148,10 +148,7 @@ with lib; {
         };
         font = {
           name = "JetBrainsMono";
-          size =
-            if config.normal.font.enable
-            then config.normal.font.size
-            else 11;
+          size = 11;
         };
       };
       dconf = {

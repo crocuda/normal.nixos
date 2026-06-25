@@ -88,7 +88,10 @@ with lib; {
       };
     };
     homeManager = {pkgs, ...}: {
-      imports = [inputs.arkenfox.homeModules.default];
+      imports = [
+        inputs.arkenfox.homeModules.default
+        inputs.nur.modules.homeManager.default
+      ];
       home.file = {
         # ".config/keepassxc/keepassxc.ini".source = dotfiles/keepassxc/keepassxc.ini;
 

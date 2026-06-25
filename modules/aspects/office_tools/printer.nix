@@ -47,9 +47,14 @@ with lib; {
       hardware.sane.enable = false;
       hardware.sane.extraBackends = [pkgs.epkowa];
     };
-    # Epson support
-    homeManager = {pkgs, ...}: {
-      home.usergroups = ["scanner" "lp" "cups"];
+    policies.to-users = {user, ...}: {
+      nixos = {...}: {
+        users.groups = {
+          scanner.members = user;
+          lp.members = user;
+          cups.members = user;
+        };
+      };
     };
   };
 }

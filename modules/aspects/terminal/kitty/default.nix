@@ -20,8 +20,8 @@ with lib; {
           extraConfig = mkMerge [
             (builtins.readFile dotfiles/kitty/kitty.conf)
             ''
-              map ctrl+j change_font_size ${toString (config.normal.font.size)}
-              font_size ${toString (config.normal.font.size)}
+              map ctrl+j change_font_size ${toString (config.normal.font.size) ? "11"}
+              font_size ${toString (config.normal.font.size) ? "11"}
             ''
           ];
         };
