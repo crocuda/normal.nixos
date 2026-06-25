@@ -31,10 +31,10 @@
       lib,
       ...
     }: {
-      home.sessionVariables = {
-        NVIM_APPNAME = "nvim";
-        EDITOR = "nvim";
-        MANPAGER = "nvim +Man!";
+      home.sessionVariables = with lib; {
+        NVIM_APPNAME = mkDefault "nvim";
+        EDITOR = mkDefault "nvim";
+        MANPAGER = mkDefault "nvim +Man!";
       };
       home.file = {
         # Vim colemak conf
@@ -57,10 +57,10 @@
       lib,
       ...
     }: {
-      home.sessionVariables = {
-        NVIM_APPNAME = "nvchad";
-        EDITOR = "nvim -u ~/.config/nvchad/init.lua";
-        MANPAGER = "nvim -u ~/.config/nvchad/init.lua -c 'Man!' -o -";
+      home.sessionVariables = with lib; {
+        NVIM_APPNAME = mkOverride 100 "nvchad";
+        EDITOR = mkOverride 100 "nvim -u ~/.config/nvchad/init.lua";
+        MANPAGER = mkOverride 100 "nvim -u ~/.config/nvchad/init.lua -c 'Man!' -o -";
       };
       home.file = {
         # NvChad
@@ -79,8 +79,8 @@
       normal.nvchad
     ];
     homeManager = {pkgs, ...}: {
-      home.sessionVariables = {
-        NVIM_APPNAME = "nvchad-ide";
+      home.sessionVariables = with lib; {
+        NVIM_APPNAME = mkOverride 50 "nvchad-ide";
       };
 
       home.file = {

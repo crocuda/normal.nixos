@@ -64,7 +64,22 @@ with lib; {
       # };
       # };
     };
-    homeManager = {pkgs, ...}: {
+    homeManager = {
+      lib,
+      pkgs,
+      config,
+      ...
+    }: {
+      ## Remove gtk window buttons
+      dconf = {
+        enable = true;
+        settings = {
+          "org/gnome/desktop/wm/preferences" = {
+            button-layout = "";
+          };
+        };
+      };
+
       home.file = let
         screen = config.normal.wm.niri.screen;
       in
@@ -108,16 +123,6 @@ with lib; {
         # notifications
         dunst
       ];
-
-      ## Remove gtk window buttons
-      dconf = {
-        enable = true;
-        settings = {
-          "org/gnome/desktop/wm/preferences" = {
-            button-layout = "";
-          };
-        };
-      };
     };
   };
 }

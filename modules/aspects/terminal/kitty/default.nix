@@ -4,7 +4,12 @@
       normal.aspects.fonts
     ];
 
-    nixos = {pkgs, ...}: {
+    nixos = {
+      lib,
+      config,
+      pkgs,
+      ...
+    }: {
       systemd.user.tmpfiles.rules = [
         "L+ %h/.config/kitty/current-theme.conf - - - - %h/.config/kitty/themes/doom_chad.conf"
       ];
@@ -28,8 +33,8 @@
           extraConfig = mkMerge [
             (builtins.readFile dotfiles/kitty/kitty.conf)
             ''
-              map ctrl+j change_font_size ${toString (config.normal.font.size) ? "11"}
-              font_size ${toString (config.normal.font.size) ? "11"}
+              map ctrl+j change_font_size ${toString (config.normal.font.size)}
+              font_size ${toString (config.normal.font.size)}
             ''
           ];
         };
