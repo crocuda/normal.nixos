@@ -1,15 +1,25 @@
 # Set font size for known apps
 {...}: {
-  normal.batteries.font = size: {
-    nixos = {lib, ...}: {
+  normal.aspects.fonts = {
+    nixos = {
+      config,
+      lib,
+      ...
+    }: {
       ###################################
       # Options definition
-      options.crocuda = with lib; {
-        font.size = mkOption {
+      options.normal.font = with lib; {
+        size = mkOption {
+          default = 11;
           type = with types; int;
-          description = "sozu configuration";
+          description = "Overall font size.";
         };
       };
+    };
+  };
+  normal.batteries.fontSize = size: {
+    nixos = {lib, ...}: {
+      config.normal.font.size = size;
     };
   };
 }
