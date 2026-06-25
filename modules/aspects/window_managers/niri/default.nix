@@ -1,15 +1,15 @@
 {
   lib,
+  den,
   normal,
   ...
 }:
 with lib; {
   flake-file.inputs = {
     mudras.url = "github:pipelight/mudras?ref=dev";
-    # Window Manager
     yofi = {
-      url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
       # url = "github:l4l/yofi";
+      url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -17,6 +17,9 @@ with lib; {
   normal.wm.niri = {
     includes = [
       normal.wm.base
+      (den.batteries.unfree [
+        "via"
+      ])
     ];
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; let
@@ -46,9 +49,6 @@ with lib; {
         wev
       ];
 
-      allow-unfree = [
-        "via"
-      ];
       services.udev.packages = with pkgs; [
         via
       ];

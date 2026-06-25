@@ -4,7 +4,7 @@
   ...
 }: {
   flake = {
-    description = "normal.nixos - Dendritic desktop modules for paranoiacs and hypochondriacs";
+    # description = "normal.nixos - Dendritic desktop modules for paranoiacs and hypochondriacs";
   };
   imports = [
     (inputs.flake-parts.flakeModules.flakeModules or {})

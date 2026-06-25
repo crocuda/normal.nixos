@@ -2,7 +2,11 @@
 ## Printer and Scanner
 # This module adds the bare minimum for scanner compatibility.
 # Support only Epson backend but can be extended if requested.
-{lib, ...}:
+{
+  lib,
+  den,
+  ...
+}:
 with lib; {
   normal.office.printers = {
     includes = [
