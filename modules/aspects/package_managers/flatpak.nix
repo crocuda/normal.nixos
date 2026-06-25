@@ -1,6 +1,6 @@
 {lib, ...}:
 with lib; {
-  normal.flatpak = {
+  normal.pm.flatpak = {
     nixos = {pkgs, ...}: {
       services.flatpak.enable = true;
 

@@ -12,14 +12,18 @@
     (inputs.den.flakeModules.dendritic or {})
   ];
   flake-file.inputs = {
+    ###################################
+    ## Dendritic
     flake-file.url = lib.mkDefault "github:vic/flake-file";
     den.url = lib.mkDefault "github:denful/den";
     flake-parts.url = lib.mkDefault "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     ###################################
     ## NixOs pkgs
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
