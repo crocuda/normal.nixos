@@ -171,4 +171,4 @@ window-rule {
   default-window-height { proportion 0.66; }
 }
 
-include "./submap.kdl"
+include optional=true "./submap.kdl"

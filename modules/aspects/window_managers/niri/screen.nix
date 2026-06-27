@@ -1,9 +1,8 @@
 {...}: {
   normal.wm.niri = {
-    homeManager = {
-      lib,
-      pkgs,
+    nixos = {
       config,
+      lib,
       ...
     }: {
       ###################################
@@ -11,9 +10,22 @@
       options.normal.wm.niri = with lib; {
         screen = mkOption {
           type = with types; enum ["21-9" "16-9"];
-          description = ''
-            Screen size
-          '';
+          description = "Screen size";
+          default = "16-9";
+        };
+      };
+    };
+    homeManager = {
+      config,
+      lib,
+      ...
+    }: {
+      ###################################
+      # Options definition
+      options.normal.wm.niri = with lib; {
+        screen = mkOption {
+          type = with types; enum ["21-9" "16-9"];
+          description = "Screen size";
           default = "16-9";
         };
       };

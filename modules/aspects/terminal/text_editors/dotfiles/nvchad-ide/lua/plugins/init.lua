@@ -18,15 +18,6 @@ return {
     lazy = false,
   },
   {
-    "nvim-treesitter/nvim-treesitter",
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
-      require "configs.treesitter"
-    end,
-    lazy = false,
-  },
-  {
     "numToStr/Comment.nvim",
     config = function()
       require "configs.comment"
@@ -72,15 +63,4 @@ return {
       },
     },
   },
-
-  -- {
-  -- 	"williamboman/mason.nvim",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"lua-language-server", "stylua",
-  -- 			"html-lsp", "css-lsp" , "prettier"
-  -- 		},
-  -- 	},
-  -- },
-  --
 }

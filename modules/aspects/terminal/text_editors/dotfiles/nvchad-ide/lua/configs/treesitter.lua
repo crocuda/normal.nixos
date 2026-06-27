@@ -9,9 +9,35 @@ end
 -- vim.api.nvim_create_autocmd("BufReadPre", { callback = M.enable_tree_sitter })
 -- vim.api.nvim_create_autocmd("FileReadPre", { callback = M.enable_tree_sitter })
 -- vim.api.nvim_create_autocmd("FilterReadPre", { callback = M.enable_tree_sitter })
+--
+M.init = function()
 
-M.options = {
-  ensure_installed = {
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { '<filetype>' },
+    callback = function() vim.treesitter.start() end,
+  })
+
+  -- vim.api.nvim_create_autocmd('FileType', {
+  --   callback = function()
+  --     -- Enable treesitter highlighting and disable regex syntax
+  --     pcall(vim.treesitter.start)
+  --     -- Enable treesitter-based indentation
+  --     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  --   end,
+  -- })
+  --
+--   local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+--   local parsersToInstall = vim.iter(
+--         M.options.ensure_installed
+--       )
+--       :filter(function(parser)
+--         return not vim.tbl_contains(alreadyInstalled, parser)
+--       end)
+--       :totable()
+--   require('nvim-treesitter').install(parsersToInstall)
+-- end
+
+M.install = {
 
     -- usual
     "vim",
@@ -65,6 +91,6 @@ M.options = {
   },
 }
 
-require("nvim-treesitter.config").setup(M.options)
+require("nvim-treesitter.configs").setup(M.options)
 
 return M

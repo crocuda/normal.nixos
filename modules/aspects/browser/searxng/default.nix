@@ -1,10 +1,4 @@
 {...}: {
-  flake-file.inputs = {
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
   normal.browser.searxng = {
     nixos = {
       pkgs,
@@ -22,17 +16,11 @@
         redis
       ];
 
-      sops.secrets."searx" = {
-        owner = "root";
-        group = "searx";
-        mode = "0440";
-        path = "/var/lib/searx/secret";
-      };
       services.searx = {
         enable = true;
         # package = pkgs-unstable.searxng;
         redisCreateLocally = true;
-        environmentFile = "/var/lib/searx/secret";
+
         settings = {
           general = {
             debug = true;
@@ -45,10 +33,8 @@
             bind_address = "::1";
             port = 8888;
 
-            # WARNING: setting secret_key here might expose it to the nix cache
-            # see below for the sops or environment file instructions to prevent this
             # secret_key = "Your secret key.";
-            secret_key = config.sops.secrets.searx.path;
+            secret_key = lib.mkDefault "9Bju5qZagZvmPfVbBQATJVZM";
 
             public_instance = false;
             limiter = true;
@@ -71,71 +57,69 @@
             hotkeys = "vim";
           };
           # Search engines
-          engines =
-            lib.mapAttrsToList (name: value: {inherit name;} // value)
-            {
-              keep_only = {
-                value = [
-                  # Text
-                  "ddg definitions"
-                  "duckduckgo"
-                  "wikipedia"
-                  "google"
-                  "qwant"
-                  "mwmbl"
-                  # Images
-                  "google images"
-                  "bing images"
-                  # Documentation
-                  "arch linux wiki"
-                ];
-              };
-              # Text
-              "ddg definitions" = {
-                weight = 30;
-                disabled = false;
-              };
-              "duckduckgo" = {
-                weight = 30;
-                disabled = false;
-              };
-              "crowdview" = {
-                disabled = false;
-                weight = 10;
-              };
-              "google" = {
-                weight = 5;
-                disabled = false;
-              };
-              "wikipedia".disabled = false;
-              "dictzone".disabled = false;
-              "mwmbl" = {
-                disabled = false;
-                weight = 0.4;
-              };
-              "startpage".disabled = false;
-              "qwant".disabled = true;
-              "brave".disabled = true;
-
-              # Resources
-              "annas_archives".disabled = false;
-              "nyaa".disabled = false;
-              "1337x".disabled = true;
-
-              # Documentation
-              "arch linux wiki".disabled = false;
-              "github".disabled = false;
-              "fdroid".disabled = false;
-              "arxiv".disabled = false;
-
-              # Images
-              "bing images".disabled = false;
-              "google images".disabled = false;
-
-              # Misc
-              "currency".disabled = false;
-              "pubmed".disabled = false;
+          engines = lib.mapAttrsToList (name: value: {inherit name;} // value) {
+            keep_only = {
+              value = [
+                # Text
+                "ddg definitions"
+                "duckduckgo"
+                "wikipedia"
+                "google"
+                "qwant"
+                "mwmbl"
+                # Images
+                "google images"
+                "bing images"
+                # Documentation
+                "arch linux wiki"
+              ];
             };
+            # Text
+            "ddg definitions" = {
+              weight = 30;
+              disabled = false;
+            };
+            "duckduckgo" = {
+              weight = 30;
+              disabled = false;
+            };
+            "crowdview" = {
+              disabled = false;
+              weight = 10;
+            };
+            "google" = {
+              weight = 5;
+              disabled = false;
+            };
+            "wikipedia".disabled = false;
+            "dictzone".disabled = false;
+            "mwmbl" = {
+              disabled = false;
+              weight = 0.4;
+            };
+            "startpage".disabled = false;
+            "qwant".disabled = true;
+            "brave".disabled = true;
+
+            # Resources
+            "annas_archives".disabled = false;
+            "nyaa".disabled = false;
+            "1337x".disabled = true;
+
+            # Documentation
+            "arch linux wiki".disabled = false;
+            "github".disabled = false;
+            "fdroid".disabled = false;
+            "arxiv".disabled = false;
+
+            # Images
+            "bing images".disabled = false;
+            "google images".disabled = false;
+
+            # Misc
+            "currency".disabled = false;
+            "pubmed".disabled = false;
+          };
           # Search engines settings
           search = {
             safe_search = 2;

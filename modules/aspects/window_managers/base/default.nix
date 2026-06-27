@@ -1,6 +1,24 @@
-{lib, ...}:
-with lib; {
+{
+  lib,
+  normal,
+  ...
+}: {
   normal.wm.base = {
+    ## Add Users to admin groups.
+    policies.to-users = {user, ...}: {
+      nixos = {...}: {
+        users.groups = {
+          # audio.members = user;
+          # video.members = user;
+          # input.members = user;
+        };
+      };
+    };
+    includes = [
+      normal.aspects.fonts
+      normal.wm.base.policies.to-users
+    ];
+
     nixos = {pkgs, ...}: {
       ## Init scripts
       programs = {
@@ -16,35 +34,24 @@ with lib; {
       hardware.acpilight.enable = true;
 
       ## Sound
-      users.groups.audio.members = config.normal.users;
       services.pulseaudio.enable = false;
       services.pipewire = {
         enable = true;
         alsa.enable = true;
-        alsa.support32Bit = true;
         pulse.enable = true;
+
+        ## WARNING: OpenBlas dependency that takes forever.
+        ## alsa.support32Bit = true;
       };
 
-      ## Video
-      users.groups.video.members = config.normal.users;
-
-      # Mudras/Swhkd
-      # No longer need to be root.
-      # Members of the **input** group can interact with keyboard.
-      users.groups.input.members = config.normal.users;
-      systemd.tmpfiles.rules = [
-        "z /dev/input 0775 root input - -"
-        "z /dev/uinput 0660 root input - -"
-      ];
-
       environment.systemPackages = with pkgs; [
-        # Font support
+        ## Font support
         fontconfig
-        # Notification support
+        ## Notification support
         libnotify
-        # Audio - pactl audio control cli
+        ## Audio - pactl audio control cli
         pulseaudio
-        pamixer
+        # pamixer
         ## Screen
         brightnessctl
       ];
@@ -95,7 +102,11 @@ with lib; {
         QT_QPA_PLATFORMTHEME = "gtk3";
       };
     };
-    homeManager = {pkgs, ...}: let
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: let
       # https://nixos.wiki/wiki/Cursor_Themes
       bibata = pkgs.runCommand "moveUp" {} ''
         mkdir -p $out/share/icons
@@ -124,7 +135,7 @@ with lib; {
         # libsForQt5.qt5ct
         # qgnomeplatform
       ];
-      # Cursor theming
+      ## Cursor theming
       home.pointerCursor = {
         size = 24;
         gtk.enable = true;
@@ -133,7 +144,7 @@ with lib; {
         package = bibata;
       };
 
-      # Gnome theming
+      ## Gnome theming
       gtk = with pkgs; {
         gtk3.extraCss = css;
         gtk4.extraCss = css;
@@ -148,7 +159,7 @@ with lib; {
         };
         font = {
           name = "JetBrainsMono";
-          size = 11;
+          size = config.normal.font.size;
         };
       };
       dconf = {
@@ -159,7 +170,7 @@ with lib; {
           };
         };
       };
-      # Qt theming
+      ## Qt theming
       qt = with pkgs; {
         enable = true;
         platformTheme.name = "qtct";

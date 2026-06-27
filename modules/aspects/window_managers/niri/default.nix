@@ -23,8 +23,16 @@ with lib; {
       ])
     ];
     nixos = {pkgs, ...}: {
+      # Mudras/Swhkd
+      # No longer need to be root.
+      # Members of the **input** group can interact with keyboard.
+      systemd.tmpfiles.rules = [
+        "z /dev/input 0775 root input - -"
+        "z /dev/uinput 0660 root input - -"
+      ];
+
       environment.systemPackages = with pkgs; let
-        system = stdenv.hostPlatform.system;
+        inherit (stdenv.hostPlatform) system;
       in [
         ## Window manager
         niri

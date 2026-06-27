@@ -24,6 +24,7 @@
       # Ensure directory for neovim servers RPC sockets.
       systemd.tmpfiles.rules = [
         "d /var/lib/nvim/servers 774 root users - -"
+        # Less
       ];
     };
     homeManager = {
@@ -42,6 +43,7 @@
         # Neovim
         ".config/nvim/lua".source = dotfiles/nvim/lua;
         ".config/nvim/init.lua".source = dotfiles/nvim/init.lua;
+        ".lesskey".source = dotfiles/.lesskey;
       };
       home.packages = with pkgs; [
         neovim
@@ -58,9 +60,9 @@
       ...
     }: {
       home.sessionVariables = with lib; {
-        NVIM_APPNAME = mkOverride 100 "nvchad";
-        EDITOR = mkOverride 100 "nvim -u ~/.config/nvchad/init.lua";
-        MANPAGER = mkOverride 100 "nvim -u ~/.config/nvchad/init.lua -c 'Man!' -o -";
+        NVIM_APPNAME = mkOverride 500 "nvchad";
+        EDITOR = mkOverride 500 "nvim -u ~/.config/nvchad/init.lua";
+        MANPAGER = mkOverride 500 "nvim -u ~/.config/nvchad/init.lua -c 'Man!' -o -";
       };
       home.file = {
         # NvChad
@@ -77,10 +79,15 @@
   normal.nvchad-ide = {
     includes = [
       normal.nvchad
+      normal.aspects.fonts
     ];
-    homeManager = {pkgs, ...}: {
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: {
       home.sessionVariables = with lib; {
-        NVIM_APPNAME = mkOverride 50 "nvchad-ide";
+        NVIM_APPNAME = mkOverride 100 "nvchad-ide";
       };
 
       home.file = {
@@ -90,13 +97,19 @@
         # NvChadIde
         ".config/nvchad-ide/lua".source = dotfiles/nvchad-ide/lua;
         ".config/nvchad-ide/init.lua".source = dotfiles/nvchad-ide/init.lua;
-        # Less
-        ".lesskey".source = dotfiles/.lesskey;
 
         # Lock plugin versions
         # :Lazy sync on first boot
         # ".config/nvim/lazy-lock.json".source = dotfiles/nvchad/lazy-lock.json;
       };
+      home.packages = with pkgs; [
+        alejandra
+        prettierd
+        sqruff
+        black
+        nil
+        stylua
+      ];
 
       programs.neovide = {
         enable = true;
@@ -108,7 +121,6 @@
           wls = false;
           srgb = false;
           font = let
-            #   cfg = config.normal;
           in {
             normal = [
               "JetBrainsMono Nerd Font Mono"
@@ -116,10 +128,7 @@
               "Noto Sans Mono CJK JP"
               "Noto Color Emoji"
             ];
-            # size =
-            #   if cfg.font.enable
-            #   then (cfg.font.size - 0.2)
-            #   else 10.8;
+            size = config.normal.font.size - 0.2;
           };
         };
       };
