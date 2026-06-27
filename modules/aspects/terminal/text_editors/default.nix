@@ -103,12 +103,24 @@
         # ".config/nvim/lazy-lock.json".source = dotfiles/nvchad/lazy-lock.json;
       };
       home.packages = with pkgs; [
+        # formaters
         alejandra
         prettierd
         sqruff
         black
-        nil
+        ruff
         stylua
+        # lsp
+        nil
+        lua-language-server
+        ltex-ls
+        marksman
+        openscad-lsp
+        sqls
+        taplo
+        tinymist
+        zls
+        gopls
       ];
 
       programs.neovide = {
@@ -120,8 +132,7 @@
           vsync = true;
           wls = false;
           srgb = false;
-          font = let
-          in {
+          font = {
             normal = [
               "JetBrainsMono Nerd Font Mono"
               "NotoSansM Nerd Font Mono"

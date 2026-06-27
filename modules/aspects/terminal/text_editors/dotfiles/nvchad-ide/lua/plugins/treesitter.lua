@@ -21,11 +21,14 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
+    build = ":TSUpdate",
+    lazy = false,
     config = function(_, opts)
-      -- dofile(vim.g.base46_cache .. "syntax")
-      -- dofile(vim.g.base46_cache .. "treesitter")
+      dofile(vim.g.base46_cache .. "syntax")
+      dofile(vim.g.base46_cache .. "treesitter")
+
       require "configs.treesitter"
-      require("nvim-treesitter").install = {
+      require("nvim-treesitter").install {
 
         -- usual
         "vim",
@@ -66,9 +69,7 @@ return {
         "caddy",
 
         "yuck",
-      },
+      }
     end,
-    build = ":TSUpdate",
-    lazy = false,
   },
 }
