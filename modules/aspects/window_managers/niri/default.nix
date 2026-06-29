@@ -16,13 +16,31 @@ with lib; {
   };
 
   normal.wm.niri = {
+    ## Add Users to admin groups.
+    policies.to-host = {user, ...}: {
+      nixos = {...}: {
+        users.groups = {
+          input.members = [];
+        };
+        users.users.${user.userName} = {
+          extraGroups = [
+            "input"
+          ];
+        };
+      };
+    };
     includes = [
       normal.wm.base
+      normal.wm.niri.policies.to-host
       (den.batteries.unfree [
         "via"
       ])
     ];
-    nixos = {pkgs, ...}: {
+    nixos = {
+      pkgs,
+      user,
+      ...
+    }: {
       # Mudras/Swhkd
       # No longer need to be root.
       # Members of the **input** group can interact with keyboard.

@@ -5,18 +5,23 @@
 }: {
   normal.wm.base = {
     ## Add Users to admin groups.
-    policies.to-users = {user, ...}: {
+    policies.to-host = {user, ...}: {
       nixos = {...}: {
         users.groups = {
-          # audio.members = user;
-          # video.members = user;
-          # input.members = user;
+          audio.members = [];
+          video.members = [];
+        };
+        users.users.${user.userName} = {
+          extraGroups = [
+            "audio"
+            "video"
+          ];
         };
       };
     };
     includes = [
       normal.aspects.fonts
-      normal.wm.base.policies.to-users
+      normal.wm.base.policies.to-host
     ];
 
     nixos = {pkgs, ...}: {

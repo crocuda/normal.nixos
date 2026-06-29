@@ -12,9 +12,7 @@ return {
   --
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    config = function(_, opts)
-      require "configs.treesitter-textobjects"
-    end,
+    config = function(_, opts) end,
     branch = "main",
     lazy = false,
   },
@@ -27,7 +25,7 @@ return {
       dofile(vim.g.base46_cache .. "syntax")
       dofile(vim.g.base46_cache .. "treesitter")
 
-      require "configs.treesitter"
+      -- require "configs.treesitter"
       require("nvim-treesitter").install {
 
         -- usual

@@ -25,7 +25,7 @@
       options.normal.wm.niri = with lib; {
         screen = mkOption {
           type = with types; enum ["21-9" "16-9"];
-          description = "Screen size";
+          description = "Set screen size.";
           default = "16-9";
         };
       };
@@ -33,6 +33,9 @@
   };
   normal.batteries.screenSize = size: {
     nixos = {lib, ...}: {
+      config.normal.wm.niri.screen = size;
+    };
+    homeManager = {lib, ...}: {
       config.normal.wm.niri.screen = size;
     };
   };
