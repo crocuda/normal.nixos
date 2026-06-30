@@ -49,11 +49,9 @@ include "./outputs.kdl"
 layout {
   always-center-single-column
   empty-workspace-above-first
-  // background-color "#00000000"
-  background-color "transparent"
-  /* 
-  * Not released
-  */
+  background-color "#00000000"
+  // background-color "transparent"
+
   // warp-mouse-to-focus
 
   // Col/Row

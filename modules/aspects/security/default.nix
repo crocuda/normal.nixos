@@ -1,5 +1,5 @@
 {...}: {
-  normal.security = {
+  normal.cryptography = {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         #doas

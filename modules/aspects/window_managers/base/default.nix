@@ -44,9 +44,6 @@
         enable = true;
         alsa.enable = true;
         pulse.enable = true;
-
-        ## WARNING: OpenBlas dependency that takes forever.
-        ## alsa.support32Bit = true;
       };
 
       environment.systemPackages = with pkgs; [

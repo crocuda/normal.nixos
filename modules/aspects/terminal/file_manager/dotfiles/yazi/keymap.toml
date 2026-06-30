@@ -1,11 +1,11 @@
-[manager]
+[mgr]
 prepend_keymap = [
   { on = [
     "q",
-  ], run = "nothing", desc = "Do not quot on q" },
+  ], run = "nothing", desc = "Do not quit on q" },
   { on = [
     "Q",
-  ], run = "nothing", desc = "Do not quot on Q" },
+  ], run = "nothing", desc = "Do not quit on Q" },
 
   # Motions
   { on = [
@@ -14,13 +14,12 @@ prepend_keymap = [
   { on = [
     "n",
   ], run = "arrow 1", desc = "Move cursor down" },
-
   { on = [
-    "E",
-  ], run = "arrow -5", desc = "Move cursor up 5 lines" },
+    "<PageDown>",
+  ], run = "arrow -10", desc = "Move cursor up 5 lines" },
   { on = [
-    "N",
-  ], run = "arrow 5", desc = "Move cursor down 5 lines" },
+    "<PageUp>",
+  ], run = "arrow 10", desc = "Move cursor down 5 lines" },
   { on = [
     "m",
   ], run = "leave", desc = "Go back to the parent directory" },
