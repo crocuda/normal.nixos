@@ -246,13 +246,13 @@
       "locked": {
         "lastModified": 1759303724,
         "narHash": "sha256-clFKYDVx+9UhX+jdKHtwfMYgXEPzXK4Ka7zXDaoNioM=",
-        "owner": "pipelight",
+        "owner": "crocuda",
         "repo": "mudras",
         "rev": "2c3f22c8af540e31076460cbcabb897eb67716db",
         "type": "github"
       },
       "original": {
-        "owner": "pipelight",
+        "owner": "crocuda",
         "ref": "dev",
         "repo": "mudras",
         "type": "github"
@@ -600,8 +600,8 @@
       },
       "original": {
         "owner": "l4l",
+        "ref": "09901e75cbdf2147553ab888adde480e57baa0d1",
         "repo": "yofi",
-        "rev": "09901e75cbdf2147553ab888adde480e57baa0d1",
         "type": "github"
       }
     }

@@ -1,5 +1,5 @@
 {...}: {
-  normal.yubikey = {
+  normal.security.yubikey = {
     nixos = {
       pkgs,
       lib,

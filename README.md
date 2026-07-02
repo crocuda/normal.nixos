@@ -65,7 +65,7 @@ Add the repo url to your flake inputs.
 # flake.nix
 inputs = {
   normal = {
-      url = "github:pipelight/normal.nixos";
+      url = "github:crocuda/normal.nixos";
   };
 }
 

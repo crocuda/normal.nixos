@@ -11,7 +11,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    normal.url = "github:pipelight/normal.nixos?ref=dev";
+    normal.url = "github:crocuda/normal.nixos?ref=dev";
   };
 
   outputs = inputs:
