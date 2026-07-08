@@ -25,8 +25,35 @@ return {
       dofile(vim.g.base46_cache .. "syntax")
       dofile(vim.g.base46_cache .. "treesitter")
 
+      -- Enable tree-sitter when filetype detected
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "<filetype>" },
+        callback = function()
+          vim.treesitter.start()
+        end,
+      })
+
+      -- Add custom language: DNS Zone.
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          -- require("nvim-treesitter.parsers").dns_zone = {
+          require("nvim-treesitter.parsers").bindzone = {
+            install_info = {
+              url = "https://github.com/goulinkh/tree-sitter-dns-zone.git",
+              branch = "main",
+              queries = "queries",
+            },
+          }
+        end,
+      })
+      -- vim.treesitter.language.register("dns_zone", { "bindzone" })
+
       -- require "configs.treesitter"
       require("nvim-treesitter").install {
+        --dns
+        -- "bindzone",
+        -- "dns_zone",
 
         -- usual
         "vim",

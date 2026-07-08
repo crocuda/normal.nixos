@@ -1,19 +1,4 @@
 return {
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    config = function()
-      require "configs.conform"
-    end,
-    lazy = false,
-  },
-  {
-    "numToStr/Comment.nvim",
-    config = function()
-      require "configs.comment"
-    end,
-    lazy = false,
-  },
   { "echasnovski/mini.ai", version = false, lazy = false },
   {
     "folke/flash.nvim",

@@ -1,6 +1,30 @@
 -- Checkout https://github.com/NvChad/NvChad for up to date plugin settings
 
 return {
+  {
+    -- Bulk find and replace utility
+    "MagicDuck/grug-far.nvim",
+    lazy = false,
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
+    config = function()
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require("grug-far").setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+      }
+    end,
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
   -- File managing , picker etc
   {
     "nvim-tree/nvim-tree.lua",
@@ -49,15 +73,6 @@ return {
     "avm99963/vim-jjdescription",
     lazy = false,
   },
-  {
-    "windwp/nvim-autopairs",
-    lazy = false,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    lazy = false,
-  },
-
   -- Session manager
   -- https://github.com/NvChad/NvChad/issues/646
   {
@@ -144,22 +159,6 @@ return {
   --     }
   --   end,
   -- },
-
-  -------------------------------
-  -- Non optimal setup
-  -- {
-  -- "mrjones2015/smart-splits.nvim",
-  -- lazy = false,
-  -- },
-  {
-    "nvim-focus/focus.nvim",
-    lazy = false,
-    -- event = "VeryLazy",
-    opts = require("configs.focus").options,
-    config = function()
-      return require("focus").setup(require("configs.focus").options)
-    end,
-  },
   -- {
   --   "0xm4n/resize.nvim",
   --   lazy = false,
@@ -170,5 +169,99 @@ return {
     opts = {
       cursor_follows_swapped_bufs = true,
     },
+  },
+  {
+    "nvim-focus/focus.nvim",
+    lazy = false,
+    -- event = "VeryLazy",
+    opts = require("configs.focus").options,
+    config = function()
+      -- Fix warning
+      -- vim.opt.winwidth = 35
+
+      local ignore_filetypes = {
+        "NvimTree",
+        "NvimTree_1",
+        "DiffviewFiles",
+        -- "toggleterm",
+      }
+      local ignore_buftypes = {
+        "popup",
+        "nofile",
+        "terminal",
+        -- "prompt",
+      }
+
+      local augroup = vim.api.nvim_create_augroup("FocusDisable", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType", "VimEnter" }, {
+        group = augroup,
+        callback = function(_)
+          if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
+            vim.o.winwidth = 35
+            vim.w.focus_disable = true
+          else
+            vim.o.winwidth = 60
+            vim.w.focus_disable = false
+          end
+        end,
+        desc = "Disable focus autoresize for BufType",
+      })
+
+      vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter", "FileType", "VimEnter" }, {
+        group = augroup,
+        callback = function(_)
+          if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+            vim.o.winwidth = 35
+            vim.b.focus_disable = true
+          else
+            vim.o.winwidth = 60
+            vim.b.focus_disable = false
+          end
+        end,
+        desc = "Disable focus autoresize for FileType",
+      })
+
+      vim.api.nvim_create_autocmd({ "VimResized" }, {
+        group = augroup,
+        callback = function(_)
+          if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
+          --
+          else
+            vim.cmd "wincmd ="
+          end
+        end,
+        desc = "Resize panes/splits on window resize for BufType",
+      })
+
+      vim.api.nvim_create_autocmd({ "VimResized" }, {
+        group = augroup,
+        callback = function(_)
+          if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+          --
+          else
+            vim.cmd "wincmd ="
+          end
+        end,
+        desc = "Resize panes/splits on window resize for FileType",
+      })
+      return require("focus").setup {
+        enable = true,
+        ui = {
+          -- Things to display in the focussed window only
+          number = false,
+          signcolumn = true,
+        },
+        autoresize = {
+          enable = false,
+          width = 90,
+          height = 30,
+          -- ugli but works
+          -- minwidth = 60,
+          -- minwidth = 35,
+          height_quickfix = 10,
+        },
+      }
+    end,
   },
 }

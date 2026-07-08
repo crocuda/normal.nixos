@@ -159,16 +159,19 @@ map(
 map("n", "<leader>D", lsp.buf.type_definition)
 map("n", "gr", lsp.buf.references)
 
--- Comment
-map("n", "<leader>/", function()
-  require("Comment.api").toggle.linewise.current()
-end, { desc = "Comment toggle" })
-map(
-  "v",
-  "<leader>/",
-  "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-  { desc = "Comment toggle" }
-)
+-- Comment (with Comment.nvim)
+-- map("n", "<leader>/", function()
+-- require("Comment.api").toggle.linewise.current()
+-- end, { desc = "Comment toggle" })
+-- map(
+--  "v",
+--  "<leader>/",
+--  "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+-- { desc = "Comment toggle" }
+-- )
+
+-- Comment with mini.comment
+-- see self configuration file.
 
 -- File tree
 --

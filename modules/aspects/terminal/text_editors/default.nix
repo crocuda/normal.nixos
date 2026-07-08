@@ -44,6 +44,9 @@
         ".config/nvim/lua".source = dotfiles/nvim/lua;
         ".config/nvim/init.lua".source = dotfiles/nvim/init.lua;
         ".lesskey".source = dotfiles/.lesskey;
+        ".config/fish/conf.d/nvim.fish".text = ''
+          alias nv='NVIM_APPNAME=nvim nvim'
+        '';
       };
       home.packages = with pkgs; [
         neovim
@@ -68,6 +71,9 @@
         # NvChad
         ".config/nvchad/lua".source = dotfiles/nvchad/lua;
         ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        ".config/fish/conf.d/nvim.fish".text = ''
+          alias nvi='NVIM_APPNAME=nvchad nvim'
+        '';
       };
       home.packages = with pkgs; [
         neovim
@@ -93,34 +99,47 @@
       home.file = {
         # Terminal multiplexer
         ".config/zellij".source = dotfiles/zellij;
+        ".config/fish/conf.d/zellij.fish".text = ''
+          function ze;
+            zellij attach $argv --force-run-commands;
+          end
+          export ze
+        '';
 
         # NvChadIde
         ".config/nvchad-ide/lua".source = dotfiles/nvchad-ide/lua;
         ".config/nvchad-ide/init.lua".source = dotfiles/nvchad-ide/init.lua;
+        ".config/fish/conf.d/nvim.fish".text = ''
+          alias nvid='neovide'
+        '';
 
         # Lock plugin versions
         # :Lazy sync on first boot
         # ".config/nvim/lazy-lock.json".source = dotfiles/nvchad/lazy-lock.json;
       };
       home.packages = with pkgs; [
-        # formaters
+        ### formatters
         alejandra
         prettierd
         sqruff
         black
         ruff
         stylua
-        # lsp
+
+        ### lsp
         nil
         lua-language-server
-        ltex-ls
-        marksman
-        openscad-lsp
         sqls
-        taplo
-        tinymist
         zls
         gopls
+
+        ## markup
+        yaml-language-server
+        marksman
+        taplo
+        tinymist
+
+        openscad-lsp
       ];
 
       programs.neovide = {

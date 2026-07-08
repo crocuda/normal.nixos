@@ -57,6 +57,16 @@ with lib; {
     homeManager = {pkgs, ...}: {
       home.file = {
         ".config/mods/mods.yml".source = dotfiles/mods/mods.yml;
+        ".config/fish/conf.d/mods.fish".text =
+          # Ai shortcut
+          ''
+            function hey;
+              mods -m mistral -f "$argv"
+            end
+            function ho;
+              mods -m deepseek-r1 -f "$argv"
+            end
+          '';
       };
       home.packages = with pkgs; [
         # Ai cli from charmbracelet/ charm.sh

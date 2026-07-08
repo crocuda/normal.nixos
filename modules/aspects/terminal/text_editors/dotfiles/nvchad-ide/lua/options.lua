@@ -23,7 +23,7 @@ api.nvim_set_option("clipboard", "unnamedplus")
 -- Autosession compat
 -- o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- Detect dns bindzone file "*.zone"
+-- Detect dns zone file "*.zone"
 vim.cmd "au BufNewFile,BufRead *.zone		setf bindzone"
 
 -- Detect dns rcl file "*.rcl"
