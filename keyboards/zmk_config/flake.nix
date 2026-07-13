@@ -25,10 +25,13 @@
         board = "nice_nano@2.0.0";
         shield = "tbkblu_%PART%";
 
+        zephyrDepsHash = "sha256-1x1yG08jFXUENGHn5hicQrUjIOfal+wdPzllQZT3h1s=";
+
         # For usb debugging purpose (check keys layout conformity...)
         # extraWestBuildFlags = ["--snippet" "zmk-usb-logging"];
 
-        zephyrDepsHash = "sha256-/J4KOCKOZQV2oqoy6I3Bzq19OC123K4Y/baKU1M/i6s=";
+        # Reset firmware
+        # westBuildFlags = ["-DSHIELD" "setting_reset"];
 
         meta = {
           description = "ZMK firmware";
@@ -37,8 +40,13 @@
         };
       };
 
-      flash = zmk-nix.packages.${system}.flash.override {inherit firmware;};
+      # nix run ".#update"
       update = zmk-nix.packages.${system}.update;
+
+      # nix run ".#flash"
+      # Help on how to boot into bootloader via shortcircuiting the board pins:
+      # https://pandakb.com/guides/how-to-flash-nicenano-firmware/
+      flash = zmk-nix.packages.${system}.flash.override {inherit firmware;};
     });
 
     devShells = forAllSystems (system: {

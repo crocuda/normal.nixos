@@ -1,7 +1,15 @@
-{normal, ...}: {
-  normal.bluetooth = {
+{
+  lib,
+  normal,
+  ...
+}: {
+  normal.bluetooth.base = {
     ## Add Users to admin groups.
-    policies.to-host = {user, ...}: {
+    policies.to-host = {
+      user,
+      host,
+      ...
+    }: {
       nixos = {...}: {
         users.groups = {
           bluetooth.members = [];
@@ -14,13 +22,16 @@
       };
     };
     includes = [
-      normal.bluetooth.policies.to-host
+      normal.bluetooth.base.policies.to-host
     ];
-    nixos = {
-      pkgs,
-      user,
-      ...
-    }: {
+  };
+
+  normal.bluetooth = {
+    includes = [
+      normal.bluetooth.base
+    ];
+
+    nixos = {...}: {
       ##########################
       ## Bluetooth
       hardware.bluetooth = {

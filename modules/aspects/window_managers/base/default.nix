@@ -137,6 +137,24 @@
         # libsForQt5.qt5ct
         # qgnomeplatform
       ];
+
+      # Default apps
+      xdg.mimeApps = {
+        enable = true;
+        associations.added = {
+          "application/pdf" = ["org.gnome.Evince.desktop"];
+          "application/images" = ["org.gnome.Loupe.desktop"];
+          "image/jpeg" = ["org.gnome.Loupe.desktop"];
+          "x-scheme-handler/tg" = ["org.telegram.desktop.desktop"];
+        };
+        defaultApplications = {
+          "application/pdf" = ["org.gnome.Evince.desktop"];
+          "application/images" = ["org.gnome.Loupe.desktop"];
+          "image/jpeg" = ["org.gnome.Loupe.desktop"];
+          "x-scheme-handler/tg" = ["org.telegram.desktop.desktop"];
+        };
+      };
+
       ## Cursor theming
       home.pointerCursor = {
         size = 24;
@@ -147,23 +165,24 @@
       };
 
       ## Gnome theming
-      gtk = with pkgs; {
-        gtk3.extraCss = css;
-        gtk4.extraCss = css;
-        enable = true;
-        theme = {
-          name = "adw-gtk3-dark";
-          package = adw-gtk3;
+      gtk = with pkgs;
+        lib.mkDefault {
+          gtk3.extraCss = css;
+          gtk4.extraCss = css;
+          enable = true;
+          theme = {
+            name = "adw-gtk3-dark";
+            package = adw-gtk3;
+          };
+          iconTheme = {
+            name = "Tela-circle";
+            package = tela-circle-icon-theme;
+          };
+          font = {
+            name = "JetBrainsMono";
+            size = config.normal.font.size;
+          };
         };
-        iconTheme = {
-          name = "Tela-circle";
-          package = tela-circle-icon-theme;
-        };
-        font = {
-          name = "JetBrainsMono";
-          size = config.normal.font.size;
-        };
-      };
       dconf = {
         enable = true;
         settings = {

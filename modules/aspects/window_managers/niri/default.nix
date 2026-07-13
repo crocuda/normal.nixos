@@ -121,7 +121,7 @@ with lib; {
           ".config/niri/outputs.kdl".source = dotfiles/niri/outputs.kdl;
           # submaps
           ".config/niri/main.kdl".source = dotfiles/niri/main.kdl;
-          ".config/niri/manageable.kdl".source = dotfiles/niri/manageable.kdl;
+          ".config/niri/manageable.kdl".source = dotfiles/niri/manageable-${screen}.kdl;
 
           # Notifications
           ".config/dunst/dunstrc".source = dotfiles/dunstrc;
