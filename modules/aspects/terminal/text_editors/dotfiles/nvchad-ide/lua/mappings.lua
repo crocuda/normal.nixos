@@ -176,7 +176,7 @@ map("n", "gr", lsp.buf.references)
 -- File tree
 --
 -- nvim-tree
-map("n", "<C-,>", "<cmd> NvimTreeToggle <cr>", { desc = "Toggle nvimtree" })
+-- map("n", "<C-,>", "<cmd> NvimTreeToggle <cr>", { desc = "Toggle nvimtree" })
 -- oil.nvim
 map("n", "<C-h>", "<cmd> OilToggle <cr>", { desc = "Toggle oil.nvim file manager" })
 

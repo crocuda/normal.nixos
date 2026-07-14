@@ -1,29 +1,4 @@
 return {
-  {
-    "stevearc/conform.nvim",
-    event = "BufWritePre",
-    config = function()
-      require "configs.conform"
-    end,
-    lazy = false,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "syntax")
-      dofile(vim.g.base46_cache .. "treesitter")
-      require "configs.treesitter"
-    end,
-    lazy = false,
-  },
-  {
-    "numToStr/Comment.nvim",
-    config = function()
-      require "configs.comment"
-    end,
-    lazy = false,
-  },
   { "echasnovski/mini.ai", version = false },
   {
     "folke/flash.nvim",

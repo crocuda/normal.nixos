@@ -2,6 +2,26 @@
 
 return {
   {
+    -- File managing , picker etc
+    -- {
+    --   "nvim-tree/nvim-tree.lua",
+    --   cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh" },
+    --   opts = function()
+    --     return require("configs.nvimtree").options
+    --   end,
+    --   config = function(_, opts)
+    --     require("nvim-tree").setup(opts)
+    --   end,
+    -- },
+    "stevearc/oil.nvim",
+    lazy = false,
+    ---@module 'oil'
+    -- ---@type oil.SetupOpts
+    config = function()
+      return require("oil").setup(require("configs.oil").options)
+    end,
+  },
+  {
     -- Bulk find and replace utility
     "MagicDuck/grug-far.nvim",
     lazy = false,
@@ -24,26 +44,6 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
-  },
-  -- File managing , picker etc
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh" },
-    opts = function()
-      return require("configs.nvimtree").options
-    end,
-    config = function(_, opts)
-      require("nvim-tree").setup(opts)
-    end,
-  },
-  {
-    "stevearc/oil.nvim",
-    lazy = false,
-    ---@module 'oil'
-    -- ---@type oil.SetupOpts
-    config = function()
-      return require("oil").setup(require("configs.oil").options)
-    end,
   },
 
   ------------------------------
