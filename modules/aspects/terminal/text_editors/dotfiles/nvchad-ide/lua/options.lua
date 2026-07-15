@@ -1,5 +1,3 @@
-require "nvchad.options"
-
 -- Fix focus.nvim warning
 -- vim.o.winwidth = 30
 -- vim.api.nvim_set_option("winwidth", 60)
@@ -12,5 +10,5 @@ vim.o.clipboard = "unnamedplus"
 vim.o.splitbelow = true
 vim.o.splitright = true
 
-vim.api.nvim_set_option("clipboard", "unnamed")
-vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.api.nvim_set_option_value("clipboard", "unnamed", {})
+vim.api.nvim_set_option_value("clipboard", "unnamedplus", {})

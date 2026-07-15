@@ -14,6 +14,7 @@ return {
     import = "nvchad.plugins",
     config = function()
       require "nvchad.autocmds"
+      require "nvchad.options"
     end,
   },
 }
