@@ -1,1 +1,3 @@
-require "config.lazy"
+require "config.lazy-ide"
+-- or
+-- require "config.lazy"
