@@ -23,6 +23,7 @@ require("lazy").setup {
     -- load plugins
     { import = {
       "plugins.ui",
+      "plugins.ide",
     } },
   },
   defaults = { lazy = true },
