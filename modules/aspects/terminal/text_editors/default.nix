@@ -56,6 +56,7 @@
   normal.nvchad = {
     includes = [
       normal.nvim
+      normal.nvim.deref
     ];
     homeManager = {
       pkgs,

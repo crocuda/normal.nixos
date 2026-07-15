@@ -1,6 +1,6 @@
 {...}: {
   normal.nvim.deref = {
-    nixos = {pkgs, ...}: {
+    homeManager = {pkgs, ...}: {
       systemd.user.services."vim-deref" = {
         # Unit is automatically enabled
         Unit = {
@@ -17,6 +17,7 @@
           ExecStart = [
             "-${pkgs.coreutils}/bin/cp -Lrf .vimrc .vimrc.deref"
             "-${pkgs.coreutils}/bin/cp -Lrf .config/nvim .config/nvim.deref"
+            "-${pkgs.coreutils}/bin/cp -Lrf .config/nvchad .config/nvchad.deref"
           ];
         };
       };
