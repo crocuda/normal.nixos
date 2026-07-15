@@ -70,7 +70,10 @@
       home.file = {
         # NvChad
         ".config/nvchad/lua".source = dotfiles/nvchad/lua;
-        ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        # ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        ".config/nvchad/init.lua".text = ''
+          require "config.lazy"
+        '';
         ".config/fish/conf.d/nvim.fish".text = ''
           alias nvi='NVIM_APPNAME=nvchad nvim'
         '';
@@ -107,8 +110,11 @@
         '';
 
         # NvChadIde
-        ".config/nvchad-ide/lua".source = dotfiles/nvchad-ide/lua;
-        ".config/nvchad-ide/init.lua".source = dotfiles/nvchad-ide/init.lua;
+        ".config/nvchad-ide/lua".source = dotfiles/nvchad/lua;
+        # ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        ".config/nvchad-ide/init.lua".text = ''
+          require "config.lazy-ide"
+        '';
 
         ".config/fish/conf.d/nvim.fish".text = ''
           alias nvid='neovide'
