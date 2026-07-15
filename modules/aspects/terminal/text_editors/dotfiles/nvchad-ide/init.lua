@@ -1,1 +1,1 @@
-require "lazy"
+require "confi.lazy"
