@@ -1,8 +1,8 @@
-local lspconfig = require "nvchad.configs.lspconfig"
+-- local lspconfig = require "nvchad.configs.lspconfig"
 
 -- local on_attach = lspconfig.on_attach
-local on_init = lspconfig.on_init
-local capabilities = lspconfig.capabilities
+-- local on_init = lspconfig.on_init
+-- local capabilities = lspconfig.capabilities
 
 -- Load nvchad lsp defaults
 -- local nvlsp = require "nvchad.configs.lspconfig"
@@ -50,8 +50,8 @@ local servers = {
 for _, lsp in ipairs(servers) do
   vim.lsp.config(lsp, {
     -- on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
+    -- on_init = on_init,
+    -- capabilities = capabilities,
   })
 
   vim.lsp.enable(lsp)
@@ -61,24 +61,24 @@ end
 -- Install pug lsp from go with: go install github.com/opa-oz/pug-lsp@latest
 vim.lsp.config("pug", {
   -- on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
+  -- on_init = on_init,
+  -- capabilities = capabilities,
   root_dir = vim.fn.getcwd(),
 })
 vim.lsp.enable "pug"
 
 vim.lsp.config("tailwindcss", {
   -- on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
+  -- on_init = on_init,
+  -- capabilities = capabilities,
   filetypes = { "pug", "css", "html", "vue", "postcss", "markdown", "svelte", "handlebars", "mustache", "jade", "htmx" },
 })
 -- vim.lsp.enable "tailwindcss"
 
 vim.lsp.config("denols", {
   -- on_attach = on_attach,
-  on_init = on_init,
-  capabilities = capabilities,
+  -- on_init = on_init,
+  -- capabilities = capabilities,
   root_marker = { "deno.lock", "deno.json", "mod.ts" },
 })
 vim.lsp.enable "denols"
@@ -283,13 +283,8 @@ vim.lsp.config("ts_ls", ts_ls_config)
 vim.lsp.enable { "ts_ls", "vue_ls" } -- If using `ts_ls` replace `vtsls` to `ts_ls`
 
 return {
-  -- LSP
-  --
   {
     "neovim/nvim-lspconfig",
-    config = function()
-      return M
-    end,
     lazy = false,
   },
 }

@@ -1,23 +1,5 @@
 local M = {}
 
-M.options = {
-  enable = true,
-  ui = {
-    -- Things to display in the focussed window only
-    number = false,
-    signcolumn = true,
-  },
-  autoresize = {
-    enable = false,
-    width = 90,
-    height = 30,
-    -- ugli but works
-    -- minwidth = 60,
-    -- minwidth = 35,
-    height_quickfix = 10,
-  },
-}
-
 -- Fix warning
 -- vim.opt.winwidth = 35
 
@@ -88,4 +70,31 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   desc = "Resize panes/splits on window resize for FileType",
 })
 
-return M
+M.options = {
+  enable = true,
+  ui = {
+    -- Things to display in the focussed window only
+    number = false,
+    signcolumn = true,
+  },
+  autoresize = {
+    enable = false,
+    width = 90,
+    height = 30,
+    -- ugli but works
+    -- minwidth = 60,
+    -- minwidth = 35,
+    height_quickfix = 10,
+  },
+}
+
+return {
+  {
+    "nvim-focus/focus.nvim",
+    lazy = false,
+    -- event = "VeryLazy",
+    config = function()
+      require("focus").setup(M.options)
+    end,
+  },
+}

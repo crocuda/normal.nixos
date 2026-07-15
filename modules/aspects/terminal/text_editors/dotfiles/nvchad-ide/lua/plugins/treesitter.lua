@@ -47,7 +47,7 @@ return {
           }
         end,
       })
-      -- vim.treesitter.language.register("dns_zone", { "bindzone" })
+      vim.treesitter.language.register("bindzone", { "dns_zone" })
 
       -- require "configs.treesitter"
       require("nvim-treesitter").install {

@@ -109,6 +109,7 @@
         # NvChadIde
         ".config/nvchad-ide/lua".source = dotfiles/nvchad-ide/lua;
         ".config/nvchad-ide/init.lua".source = dotfiles/nvchad-ide/init.lua;
+
         ".config/fish/conf.d/nvim.fish".text = ''
           alias nvid='neovide'
         '';

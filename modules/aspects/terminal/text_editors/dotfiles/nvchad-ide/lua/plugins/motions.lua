@@ -1,4 +1,8 @@
 return {
+  {
+    "windwp/nvim-autopairs",
+    lazy = false,
+  },
   { "echasnovski/mini.ai", version = false, lazy = false },
   {
     "folke/flash.nvim",

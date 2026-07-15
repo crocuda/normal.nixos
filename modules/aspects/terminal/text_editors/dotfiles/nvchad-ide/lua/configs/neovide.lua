@@ -1,3 +1,5 @@
+-- Gui config
+
 if vim.g.neovide then
   -- Title
   vim.opt.title = true

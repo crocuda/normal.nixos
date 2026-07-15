@@ -41,6 +41,7 @@ vim.api.nvim_create_autocmd("QuitPre", { callback = M.close_nvim_tree })
 
 -----------------------------------
 -- NvimTree keybindings
+
 -- QWERTY
 M.on_attach_qwerty = function(bufnr)
   local api = require "nvim-tree.api"
@@ -111,4 +112,12 @@ M.options = {
   },
 }
 
-return M
+return {
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus", "NvimTreeRefresh" },
+    config = function()
+      require("nvim-tree").setup(M.options)
+    end,
+  },
+}

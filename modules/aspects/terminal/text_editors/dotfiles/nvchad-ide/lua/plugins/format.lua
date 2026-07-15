@@ -1,13 +1,8 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    lazy = false,
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     lazy = false,
   },
-
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",

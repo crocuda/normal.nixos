@@ -1,3 +1,18 @@
+-- Detect dns zone file "*.zone"
+vim.cmd "au BufNewFile,BufRead *.zone	setf bindzone"
+
+-- Detect dns rcl file "*.rcl"
+vim.cmd "au BufNewFile,BufRead *.rcl setf rcl"
+-- vim.cmd "au BufNewFile,BufRead *.jjdescription		setf gitcommit"
+-- vim.cmd "au FileType bindzone   setl cms=;%s"
+-- vim.cmd "au FileType bindzone   setl commentstring=;%s"
+--
+vim.cmd "au BufNewFile,BufRead *.pug setf pug"
+
+-- Caddy webserver
+vim.cmd "au BufNewFile,BufRead *.caddyfile setf caddy"
+vim.cmd "au BufNewFile,BufRead *.Caddyfile setf caddy"
+
 return {
   {
     "R-nvim/R.nvim",
