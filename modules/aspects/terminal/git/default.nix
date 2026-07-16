@@ -64,6 +64,24 @@
             templates = {
               draft_commit_description = let
                 hint = builtins.readFile ./dotfiles/conventional_change_message;
+                author = ''
+                  indent("JJ: ",
+                    concat(
+                      "Author: ",
+                      author.name(),
+                      "\n"
+                    )
+                  )
+                '';
+                email = ''
+                  indent("JJ: ",
+                    concat(
+                      "Email: ",
+                      author.email(),
+                      "\n"
+                    )
+                  )
+                '';
                 signature = ''
                   if(self.signature(),
                     indent("JJ:     ",
@@ -88,6 +106,8 @@
                     "\nJJ: This commit contains the following changes:\n","",
                     ${changes}
                   ),
+                  ${author},
+                  ${email},
                 )
               '';
             };

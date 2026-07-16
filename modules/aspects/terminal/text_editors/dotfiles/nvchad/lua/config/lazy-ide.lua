@@ -71,3 +71,4 @@ require("lazy").setup {
 }
 require "config.options"
 require "config.mappings"
+require "config.neovide"

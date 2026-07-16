@@ -35,6 +35,8 @@ return {
           javascript = { "prettier", "prettierd" },
           typescript = { "prettier", "prettierd" },
 
+          astro = { "prettier", "prettierd" },
+
           typescriptreact = { "prettier", "prettierd" },
           svelte = { "prettier", "prettierd" },
           graphql = { "prettier", "prettierd" },

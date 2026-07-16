@@ -89,6 +89,7 @@
   normal.nvchad-ide = {
     includes = [
       normal.nvchad
+      # normal.nvchad-ide._
       normal.aspects.fonts
     ];
     homeManager = {
@@ -129,6 +130,7 @@
         ### formatters
         alejandra
         prettierd
+        prettier
         sqruff
         black
         ruff
@@ -140,6 +142,9 @@
         sqls
         zls
         gopls
+        typescript-language-server
+        # astro-language-server
+        vue-language-server
 
         ## markup
         yaml-language-server
@@ -169,6 +174,27 @@
             size = config.normal.font.size - 0.2;
           };
         };
+      };
+    };
+  };
+  normal.nvchad-ide.astro = {
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: {
+      programs.neovim = {
+        initLua = ''
+          vim.lsp.config['astro'] = {
+            init_options = {
+              typescript = {
+                tsdk = ${pkgs.typescript}/lib/node_modules/typescript/lib,
+              },
+            },
+          }
+
+          vim.lsp.enable('astro')
+        '';
       };
     };
   };

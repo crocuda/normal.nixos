@@ -1,12 +1,9 @@
+-- -- Load nvchad lsp defaults
 -- local lspconfig = require "nvchad.configs.lspconfig"
-
+--
 -- local on_attach = lspconfig.on_attach
 -- local on_init = lspconfig.on_init
 -- local capabilities = lspconfig.capabilities
-
--- Load nvchad lsp defaults
--- local nvlsp = require "nvchad.configs.lspconfig"
--- nvlsp.defaults()
 
 local servers = {
   -- Lua
@@ -21,6 +18,8 @@ local servers = {
   "yamlls",
   "marksman",
   "tinymist",
+
+  "astro",
 
   -- Go
   "gopls",
@@ -71,7 +70,20 @@ vim.lsp.config("tailwindcss", {
   -- on_attach = on_attach,
   -- on_init = on_init,
   -- capabilities = capabilities,
-  filetypes = { "pug", "css", "html", "vue", "postcss", "markdown", "svelte", "handlebars", "mustache", "jade", "htmx" },
+  filetypes = {
+    "pug",
+    "css",
+    "html",
+    "vue",
+    "astro",
+    "postcss",
+    "markdown",
+    "svelte",
+    "handlebars",
+    "mustache",
+    "jade",
+    "htmx",
+  },
 })
 -- vim.lsp.enable "tailwindcss"
 
@@ -120,19 +132,12 @@ vim.lsp.config("ltex", {
 })
 vim.lsp.enable "ltex"
 
--- Diagnostic styling
--- Enable diagnostic floating window on insert mode
---
-vim.diagnostic.config {
-  -- float = "always",
-  virtual_text = false,
-  severity_sort = true,
-}
--- Toggle diagnostic virtual text
-local function diagnostic_floating_window()
-  vim.diagnostic.open_float(nil, { focus = false })
-end
-vim.api.nvim_create_autocmd("CursorHoldI", { callback = diagnostic_floating_window })
+vim.lsp.config("astro", {
+  init_options = {
+    typescript = {},
+  },
+})
+vim.lsp.enable "astro"
 
 -- Configuration from:
 -- https://github.com/vuejs/language-tools/wiki/Neovim
@@ -163,6 +168,7 @@ local pug_plugin = {
   languages = { "vue" },
   configNamespace = "typescript",
 }
+
 local vtsls_config = {
   settings = {
     vtsls = {
@@ -185,102 +191,30 @@ local ts_ls_config = {
     },
   },
   filetypes = tsserver_filetypes,
-  root_markers = { "tsconfig.json", "vite.config.ts", "vitest.config.ts" },
-  settings = {
-    typescript = {
-      tsserver = {
-        useSyntaxServer = false,
-      },
-      inlayHints = {
-        includeInlayParameterNameHints = "all",
-        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
-    },
-  },
 }
 
 -- If you are not on most recent `nvim-lspconfig` or you want to override
-local vue_ls_config = {
-  cmd = { "bun", "run", "vue-language-server", "--stdio" },
-  init_options = {
-    vue = {
-      hybridMode = true,
-    },
-  },
-  root_markers = { "vite.config.ts", "vitest.config.ts" },
-  settings = {
-    pug = {
-      validate = true,
-    },
-    css = {
-      validate = true,
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-    scss = {
-      validate = true,
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-    less = {
-      validate = true,
-      lint = {
-        unknownAtRules = "ignore",
-      },
-    },
-  },
-  on_init = function(client)
-    client.handlers["tsserver/request"] = function(_, result, context)
-      local ts_clients = vim.lsp.get_clients { bufnr = context.bufnr, name = "ts_ls" }
-      local vtsls_clients = vim.lsp.get_clients { bufnr = context.bufnr, name = "vtsls" }
-      local clients = {}
-
-      vim.list_extend(clients, ts_clients)
-      vim.list_extend(clients, vtsls_clients)
-
-      if #clients == 0 then
-        vim.notify(
-          "Could not find `vtsls` or `ts_ls` lsp client, `vue_ls` would not work without it.",
-          vim.log.levels.ERROR
-        )
-        return
-      end
-      local ts_client = clients[1]
-
-      local param = table.unpack(result)
-      local id, command, payload = table.unpack(param)
-      ts_client:exec_cmd({
-        title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
-        command = "typescript.tsserverRequest",
-        arguments = {
-          command,
-          payload,
-        },
-      }, { bufnr = context.bufnr }, function(_, r)
-        local response = r and r.body
-        -- TODO: handle error or response nil here, e.g. logging
-        -- NOTE: Do NOT return if there's an error or no response, just return nil back to the vue_ls to prevent memory leak
-        local response_data = { { id, response } }
-
-        ---@diagnostic disable-next-line: param-type-mismatch
-        client:notify("tsserver/response", response_data)
-      end)
-    end
-  end,
-}
+local vue_ls_config = {}
 -- nvim 0.11 or above
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.config("ts_ls", ts_ls_config)
 vim.lsp.enable { "ts_ls", "vue_ls" } -- If using `ts_ls` replace `vtsls` to `ts_ls`
+
+-- Diagnostic styling
+-- Enable diagnostic floating window on insert mode
+--
+vim.diagnostic.config {
+  -- float = "always",
+  virtual_text = false,
+  severity_sort = true,
+}
+
+-- Toggle diagnostic virtual text
+local function diagnostic_floating_window()
+  vim.diagnostic.open_float(nil, { focus = false })
+end
+vim.api.nvim_create_autocmd("CursorHoldI", { callback = diagnostic_floating_window })
 
 return {
   {
