@@ -416,6 +416,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_7": {
+      "locked": {
+        "lastModified": 1768875095,
+        "narHash": "sha256-dYP3DjiL7oIiiq3H65tGIXXIT1Waiadmv93JS0sS+8A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ed142ab1b3a092c4d149245d0c4126a5d7ea00b0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_3",
@@ -476,6 +492,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "rustmission": "rustmission",
+        "rycee": "rycee",
         "sops-nix": "sops-nix",
         "yofi": "yofi"
       }
@@ -536,6 +553,26 @@
       "original": {
         "owner": "intuis",
         "repo": "rustmission",
+        "type": "github"
+      }
+    },
+    "rycee": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_7"
+      },
+      "locked": {
+        "dir": "repos/rycee",
+        "lastModified": 1786440412,
+        "narHash": "sha256-hQ1NQ1X8hHFgMtY8U6e0SxVVx+KyzPU7OSMnWP/inZE=",
+        "owner": "nix-community",
+        "repo": "nur-combined",
+        "rev": "16663721613d05a52cf9e8736f3b8c1db7df8bc8",
+        "type": "github"
+      },
+      "original": {
+        "dir": "repos/rycee",
+        "owner": "nix-community",
+        "repo": "nur-combined",
         "type": "github"
       }
     },

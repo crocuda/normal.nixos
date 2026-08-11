@@ -23,6 +23,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     rustmission.url = "github:intuis/rustmission";
+    rycee.url = "github:nix-community/nur-combined?dir=repos/rycee";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

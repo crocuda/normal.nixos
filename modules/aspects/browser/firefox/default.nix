@@ -5,96 +5,11 @@
 }:
 with lib; {
   flake-file.inputs = {
-    ## Browser
-    # NUR - Nix User Repository
-    nur.url = "github:nix-community/NUR";
-    arkenfox.url = "github:dwarfmaster/arkenfox-nixos";
   };
 
   normal.browser.firefox = {
-    nixos = {pkgs, ...}: {
-      programs.firefox = {
-        # package = pkgs.librewolf;
-        enable = true;
-        policies = {
-          DisableFirefoxStudies = true;
-          EnableTrackingProtection = {
-            Value = true;
-            Locked = true;
-            Cryptomining = true;
-            Fingerprinting = true;
-          };
-          # Disable pasword manager
-          PasswordManagerEnabled = false;
-          OfferToSaveLoginsDefault = false;
-
-          DisableTelemetry = true;
-          DisablePocket = true;
-          DisableFirefoxAccounts = true;
-          DisableAccounts = true;
-          DisableFirefoxScreenshots = true;
-          OverrideFirstRunPage = "";
-          OverridePostUpdatePage = "";
-          DontCheckDefaultBrowser = true;
-          DisplayMenuBar = "default-off";
-          SearchBar = "unified";
-          NoDefaultBookmarks = true;
-          DisplayBookmarksToolbar = "never";
-          Preferences = let
-            lock-false = {
-              Value = false;
-              Status = "locked";
-            };
-            lock-true = {
-              Value = true;
-              Status = "locked";
-            };
-            lock-empty-string = {
-              Value = "";
-              Status = "locked";
-            };
-          in {
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = lock-true;
-
-            # Remove poluting defaults
-            "extensions.pocket.enabled" = lock-false;
-
-            # Remove default top sites
-            "browser.topsites.contile.enabled" = lock-false;
-            "browser.urlbar.suggest.topsites" = lock-false;
-
-            # Remove sponsored sites
-            "browser.newtabpage.pinned" = lock-empty-string;
-            "browser.newtabpage.activity-stream.showSponsored" = lock-false;
-            "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
-            "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
-
-            # Remove firefox shiny buttons
-            "browser.tabs.firefox-view" = false;
-            "browser.tabs.firefox-view-next" = false;
-            # Style
-            "browser.compactmode.show" = lock-true;
-            "browser.uidensity" = {
-              Value = 1;
-              Status = "locked";
-            };
-            # Fonts - make web pages follow system font
-            "browser.display.use_document_fonts" = {
-              Value = 0;
-              Status = "locked";
-            };
-          };
-        };
-      };
-    };
     homeManager = {pkgs, ...}: {
-      imports = [
-        inputs.arkenfox.homeModules.default
-        inputs.nur.modules.homeManager.default
-      ];
       home.file = {
-        # ".config/keepassxc/keepassxc.ini".source = dotfiles/keepassxc/keepassxc.ini;
-
         # Desktop entry for firefox_i2p
         ".local/share/applications/firefox_i2p.desktop".source = dotfiles/firefox_i2p.desktop;
         ".local/share/applications/firefox_normy.desktop".source = dotfiles/firefox_normy.desktop;
@@ -109,194 +24,14 @@ with lib; {
         # native tridactyl support
         nativeMessagingHosts = [pkgs.tridactyl-native];
 
-        ## Enable arkenfox user.js
-        arkenfox = {
-          enable = true;
-          version = "140.0";
-        };
-
-        extraPolicies = let
-          makeExtension = shortId: uuid: {
-            name = uuid;
-            value = {
-              install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
-              installation_mode = "normal_installed";
-            };
-          };
-          list = listToAttrs [
-            (makeExtension "google-lighthouse" "cf3dba12-a848-4f68-8e2d-f9fadc0721de")
-          ];
-        in {
-          # To add additional extensions, find it on addons.mozilla.org, find
-          # the short ID in the url (like https://addons.mozilla.org/en-US/firefox/addon/!SHORT_ID!/)
-          # Then, download the XPI by filling it in to the install_url template, unzip it,
-          # run `jq .browser_specific_settings.gecko.id manifest.json` or
-          # `jq .applications.gecko.id manifest.json` to get the UUID
-          ExtensionSettings = list;
-        };
-
-        profiles = let
-          extensions = {
-            packages = with pkgs.nur.repos.rycee.firefox-addons; [
-              darkreader
-              ublock-origin
-              keepassxc-browser
-              tridactyl
-              privacy-badger
-              # tranquility
-              # rust-search-extension
-            ];
-            force = true;
-          };
-
-          defaultSettings = {
-            # Enable extensions.
-            "extensions.autoDisableScopes" = 0;
-            "browser.tabs.firefox-view" = false;
-            "browser.firefox-view.virtual-list.enabled" = false;
-            "services.sync.prefs.sync.browser.firefox-view.feature-tour" = false;
-          };
-
-          # Get every susbsection number
-          # jq 'keys' arkenfox-nixos/autogen/122.0.json
-          arkenfox = {
-            enable = true;
-            "0000".enable = true;
-            "0100".enable = true;
-            "0200".enable = true;
-            "0300".enable = true;
-            "0400".enable = true;
-            "0600".enable = true;
-            "0700".enable = true;
-            "0800".enable = true;
-            "0900".enable = true;
-            "1000".enable = true;
-            "1200".enable = true;
-            "1600".enable = true;
-            "1700".enable = true;
-            "2000".enable = true;
-            "2400".enable = true;
-            "2600".enable = true;
-            "2700".enable = true;
-            "2800".enable = true;
-            "4000".enable = true;
-            "4500".enable = true;
-            "5000".enable = true;
-            "5500".enable = true;
-            "6000".enable = true;
-            "7000".enable = true;
-            "8000".enable = true;
-            "9000".enable = true;
-          };
-
-          # Search engines
-          search = {
-            force = true;
-            default = "SearxNG";
-            order = [
-              "SearxNG"
-              "ddg"
-            ];
-            engines = {
-              # Local search engine
-              "SearxNG" = {
-                urls = [
-                  {template = "http://[::1]:8888/?q={searchTerms}";}
-                  # {template = "http://127.0.0.1:8888/?q={searchTerms}";}
-                ];
-                # icon = "http://127.0.0.1:8888/static/themes/simple/img/favicon.svg";
-                icon = "http://[::1]:8888/static/themes/simple/img/favicon.svg";
-                updateInterval = 24 * 60 * 60 * 1000;
-                definedAliases = ["@searx"];
-              };
-
-              # Nix engines
-              "Nix Packages" = {
-                urls = [
-                  {
-                    template = "https://search.nixos.org/packages";
-                    params = [
-                      {
-                        name = "type";
-                        value = "packages";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = ["@nixp"];
-              };
-
-              # Nixos resources
-              "My NixOS" = {
-                urls = [{template = "https://mynixos.com/search?q={searchTerms}";}];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = ["@nixs"];
-              };
-
-              "NixOS Wiki" = {
-                urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
-                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                definedAliases = ["@nixw"];
-              };
-
-              # Rust Doc
-              "Docs.rs" = {
-                urls = [{template = "http://docs.rs/releases/search?query={searchTerms}";}];
-                icon = "https://docs.rs/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000;
-                definedAliases = ["@rust"];
-              };
-
-              # Common engines
-              "wikipedia".metaData.alias = "@wiki";
-
-              # Ebooks
-              "Annas" = {
-                urls = [
-                  {template = "https://annas-archive.org/search?q={searchTerms}";}
-                ];
-                icon = "https://annas-archive.org/favicon-16x16.png";
-                updateInterval = 24 * 60 * 60 * 1000;
-                definedAliases = ["@annas"];
-              };
-
-              # Anime torrent
-              "Nyaa" = {
-                urls = [{template = "https://nyaa.si/?q={searchTerms}";}];
-                icon = "https://nyaa.si/static/favicon.png";
-                updateInterval = 24 * 60 * 60 * 1000;
-                definedAliases = ["@nyaa"];
-              };
-
-              # Remove shity search engines
-              "google".metaData.hidden = true;
-              "amazondotcom-us".metaData.hidden = true;
-              "amazondotnl".metaData.hidden = true;
-              "bing".metaData.hidden = true;
-              "ebay".metaData.hidden = true;
-              "ecosia".metaData.hidden = true;
-            };
-          };
-        in {
+        profiles = {
           default = {
-            inherit policies;
-            inherit extensions;
-            inherit arkenfox;
-            inherit search;
             userChrome = builtins.readFile dotfiles/userChrome.css;
             isDefault = true;
             id = 0;
             settings = {} // defaultSettings;
           };
           i2p = {
-            inherit extensions;
-            inherit arkenfox;
-            inherit search;
             userChrome = builtins.readFile dotfiles/userChrome_alt.css;
             isDefault = false;
             id = 1;
@@ -312,18 +47,13 @@ with lib; {
                 # Enable extensions.
                 "extensions.autoDisableScopes" = 0;
               }
-              // defaultSettings;
           };
           normy = {
-            inherit extensions;
-            inherit search;
             userChrome = builtins.readFile dotfiles/userChrome_normy.css;
             isDefault = false;
             id = 2;
-            settings = {} // defaultSettings;
           };
           open = {
-            inherit search;
             userChrome = builtins.readFile dotfiles/userChrome_normy.css;
             id = 3;
           };
