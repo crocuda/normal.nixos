@@ -8,6 +8,8 @@
 local servers = {
   -- Lua
   "lua_ls",
+  "fish_lsp",
+  "bashls",
 
   -- Nix
   "nil_ls",
@@ -18,6 +20,9 @@ local servers = {
   "yamlls",
   "marksman",
   "tinymist",
+
+  -- proto3 files
+  "protols",
 
   "astro",
 
@@ -132,12 +137,18 @@ vim.lsp.config("ltex", {
 })
 vim.lsp.enable "ltex"
 
-vim.lsp.config("astro", {
-  init_options = {
-    typescript = {},
-  },
-})
+-- vim.lsp.config("astro", {
+--   init_options = {
+--     typescript = {},
+--   },
+-- })
 vim.lsp.enable "astro"
+
+vim.lsp.start {
+  name = "typescript",
+  cmd = { "typescript-language-server", "--stdio" },
+  root_dir = vim.fs.dirname(vim.fs.find({ "tsconfig.json", "package.json" }, { upward = true })[1]),
+}
 
 -- Configuration from:
 -- https://github.com/vuejs/language-tools/wiki/Neovim
@@ -154,10 +165,17 @@ vim.lsp.enable "astro"
 -- IMPORTANT: nvchad users cannot use `$MASON` directly as the option is set to `skip`, see: https://github.com/NvChad/NvChad/blob/29ebe31ea6a4edf351968c76a93285e6e108ea08/lua/nvchad/configs/mason.lua#L4
 
 local vue_language_server_path = "./node_modules/@vue/language-server"
+local tsserver_path = "./node_modules/typescript"
 local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 
 local vue_plugin = {
   name = "@vue/typescript-plugin",
+  location = vue_language_server_path,
+  languages = { "vue" },
+  configNamespace = "typescript",
+}
+local tailwind_plugin = {
+  name = "@tailwindcss/language-server",
   location = vue_language_server_path,
   languages = { "vue" },
   configNamespace = "typescript",
@@ -173,9 +191,11 @@ local vtsls_config = {
   settings = {
     vtsls = {
       tsserver = {
+        path = tsserver_path,
         globalPlugins = {
           vue_plugin,
           pug_plugin,
+          tailwind_plugin,
         },
       },
     },

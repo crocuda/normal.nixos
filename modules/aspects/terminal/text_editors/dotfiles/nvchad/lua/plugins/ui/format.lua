@@ -54,6 +54,7 @@ return {
           hcl = { "hclfmt" },
           sql = { "sqruff" },
 
+          proto = { "buf" },
           caddy = { "caddy" },
         },
 

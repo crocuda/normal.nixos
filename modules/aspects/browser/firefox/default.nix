@@ -104,6 +104,7 @@ with lib; {
       programs.firefox = {
         enable = true;
         # package = pkgs.librewolf;
+        languagePacks = ["en-GB" "fr"];
 
         # native tridactyl support
         nativeMessagingHosts = [pkgs.tridactyl-native];
@@ -112,6 +113,26 @@ with lib; {
         arkenfox = {
           enable = true;
           version = "140.0";
+        };
+
+        extraPolicies = let
+          makeExtension = shortId: uuid: {
+            name = uuid;
+            value = {
+              install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+              installation_mode = "normal_installed";
+            };
+          };
+          list = listToAttrs [
+            (makeExtension "google-lighthouse" "cf3dba12-a848-4f68-8e2d-f9fadc0721de")
+          ];
+        in {
+          # To add additional extensions, find it on addons.mozilla.org, find
+          # the short ID in the url (like https://addons.mozilla.org/en-US/firefox/addon/!SHORT_ID!/)
+          # Then, download the XPI by filling it in to the install_url template, unzip it,
+          # run `jq .browser_specific_settings.gecko.id manifest.json` or
+          # `jq .applications.gecko.id manifest.json` to get the UUID
+          ExtensionSettings = list;
         };
 
         profiles = let
@@ -263,6 +284,7 @@ with lib; {
           };
         in {
           default = {
+            inherit policies;
             inherit extensions;
             inherit arkenfox;
             inherit search;
@@ -299,6 +321,11 @@ with lib; {
             isDefault = false;
             id = 2;
             settings = {} // defaultSettings;
+          };
+          open = {
+            inherit search;
+            userChrome = builtins.readFile dotfiles/userChrome_normy.css;
+            id = 3;
           };
         };
       };

@@ -11,10 +11,23 @@ M.base46 = {
     ["FileCursor"] = { bg = "grey", fg = "green" },
   },
   hl_override = {
-    ["St_LspMsg"] = { bg = "black2" },
-    ["St_LspInfo"] = { bg = "black2" },
-    ["St_LspHints"] = { bg = "black2" },
     ["St_Lsp"] = { bg = "black2" },
+    ["St_LspMsg"] = { bg = "black2" },
+
+    ["DiagnosticInfo"] = { bg = "black2" },
+    ["St_LspInfo"] = { bg = "black2" },
+
+    ["DiagnosticHint"] = { bg = "black2" },
+    ["St_LspHints"] = { bg = "black2" },
+
+    ["DiagnosticError"] = { bg = "black2" },
+    ["St_lspError"] = { bg = "black2" },
+    ["St_LspError"] = { bg = "black2" },
+
+    ["DiagnosticWarn"] = { bg = "black2" },
+    ["St_lspWarning"] = { bg = "black2" },
+    ["St_LspWarning"] = { bg = "black2" },
+
     ["St_file_sep"] = { bg = "black2" },
     ["St_gitIcons"] = { bg = "black2" },
   },

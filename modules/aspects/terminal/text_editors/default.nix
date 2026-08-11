@@ -139,12 +139,23 @@
         ### lsp
         nil
         lua-language-server
+
+        # shell
+        bash-language-server
+        fish-lsp
+
+        # protols
+
         sqls
         zls
         gopls
+
+        ## Web deprecated in favor of a per repo:
+        ## bun install inside a `shell.nix`.
+        #
         typescript-language-server
         # astro-language-server
-        vue-language-server
+        # vue-language-server
 
         ## markup
         yaml-language-server
