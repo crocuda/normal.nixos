@@ -21,32 +21,27 @@ with lib; {
         # package = pkgs.librewolf;
         languagePacks = ["en-GB" "fr"];
 
-        # native tridactyl support
-        nativeMessagingHosts = [pkgs.tridactyl-native];
-
         profiles = {
           default = {
             userChrome = builtins.readFile dotfiles/userChrome.css;
             isDefault = true;
             id = 0;
-            settings = {} // defaultSettings;
           };
           i2p = {
             userChrome = builtins.readFile dotfiles/userChrome_alt.css;
             isDefault = false;
             id = 1;
-            settings =
-              {
-                "dom.security.https_only_mode" = lib.mkForce false;
-                "media.peerconnection.ice.proxy_only" = true;
-                "network.proxy.type" = 1;
-                "network.proxy.http" = "127.0.0.1";
-                "network.proxy.http_port" = 4444;
-                "network.proxy.ssl" = "127.0.0.1";
-                "network.proxy.ssl_port" = 4444;
-                # Enable extensions.
-                "extensions.autoDisableScopes" = 0;
-              }
+            settings = {
+              "dom.security.https_only_mode" = lib.mkForce false;
+              "media.peerconnection.ice.proxy_only" = true;
+              "network.proxy.type" = 1;
+              "network.proxy.http" = "127.0.0.1";
+              "network.proxy.http_port" = 4444;
+              "network.proxy.ssl" = "127.0.0.1";
+              "network.proxy.ssl_port" = 4444;
+              # Enable extensions.
+              "extensions.autoDisableScopes" = 0;
+            };
           };
           normy = {
             userChrome = builtins.readFile dotfiles/userChrome_normy.css;

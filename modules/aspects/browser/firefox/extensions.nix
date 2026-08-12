@@ -56,11 +56,11 @@ with lib; {
             packages = with pkgs.nur.repos.rycee.firefox-addons; [
               google-lighthouse
 
-              darkreader
               ublock-origin
-              keepassxc-browser
-              tridactyl
               privacy-badger
+              tridactyl
+              keepassxc-browser
+              darkreader
               # tranquility
               # rust-search-extension
             ];

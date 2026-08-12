@@ -1,14 +1,9 @@
-{
-  lib,
-  inputs,
-  ...
-}:
+{lib, ...}:
 with lib; {
   flake-file.inputs = {
-    ## Browser
   };
   normal.browser.firefox = {
-    homeManager = {...}: {
+    homeManager = {pkgs, ...}: {
       programs.firefox = {
         profiles = let
           # Search engines
