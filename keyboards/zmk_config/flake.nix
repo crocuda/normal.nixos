@@ -22,10 +22,11 @@
         name = "firmware";
 
         src = nixpkgs.lib.sourceFilesBySuffices self [".board" ".cmake" ".conf" ".defconfig" ".dts" ".dtsi" ".json" ".keymap" ".overlay" ".shield" ".yml" "_defconfig"];
+
         board = "nice_nano@2.0.0";
         shield = "tbkblu_%PART%";
 
-        zephyrDepsHash = "sha256-1x1yG08jFXUENGHn5hicQrUjIOfal+wdPzllQZT3h1s=";
+        zephyrDepsHash = "sha256-9nQeZNViGZft1Xd8DnEllDi1MeQTd1ejTKzf1x2XlG0=";
 
         # For usb debugging purpose (check keys layout conformity...)
         # extraWestBuildFlags = ["--snippet" "zmk-usb-logging"];
