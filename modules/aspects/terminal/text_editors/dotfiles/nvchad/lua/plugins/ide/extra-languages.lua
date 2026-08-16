@@ -26,6 +26,16 @@ vim.filetype.add {
 
 return {
   {
+    "0xferrous/ansi.nvim",
+    config = function()
+      require("ansi").setup {
+        auto_enable = false, -- Auto-enable for configured filetypes
+        auto_enable_stdin = true, -- Auto-enable for piped stdin content
+        filetypes = { "log", "ansi" },
+      }
+    end,
+  },
+  {
     "R-nvim/R.nvim",
     lazy = false,
     config = function()
