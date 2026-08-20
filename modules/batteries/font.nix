@@ -36,5 +36,8 @@
     nixos = {lib, ...}: {
       config.normal.font.size = size;
     };
+    homeManager = {lib, ...}: {
+      config.normal.font.size = size;
+    };
   };
 }
