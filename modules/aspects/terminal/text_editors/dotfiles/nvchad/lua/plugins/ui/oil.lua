@@ -48,7 +48,7 @@ return {
 
       -- Clear git status cache on refresh
       local refresh = require("oil.actions").refresh
-      local rig_refresh = refresh.callback
+      local orig_refresh = refresh.callback
       refresh.callback = function(...)
         git_status = new_git_status()
         orig_refresh(...)

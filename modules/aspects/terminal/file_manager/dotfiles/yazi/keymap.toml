@@ -15,11 +15,11 @@ prepend_keymap = [
     "n",
   ], run = "arrow 1", desc = "Move cursor down" },
   { on = [
-    "<PageDown>",
-  ], run = "arrow -10", desc = "Move cursor up 5 lines" },
-  { on = [
     "<PageUp>",
-  ], run = "arrow 10", desc = "Move cursor down 5 lines" },
+  ], run = "arrow -10", desc = "Move cursor up 10 lines" },
+  { on = [
+    "<PageDown>",
+  ], run = "arrow 10", desc = "Move cursor down 10 lines" },
   { on = [
     "m",
   ], run = "leave", desc = "Go back to the parent directory" },

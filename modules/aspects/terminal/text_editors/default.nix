@@ -56,6 +56,7 @@
   normal.nvchad = {
     includes = [
       normal.nvim
+      normal.nvim.deref
     ];
     homeManager = {
       pkgs,
@@ -70,7 +71,10 @@
       home.file = {
         # NvChad
         ".config/nvchad/lua".source = dotfiles/nvchad/lua;
-        ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        # ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        ".config/nvchad/init.lua".text = ''
+          require "config.lazy"
+        '';
         ".config/fish/conf.d/nvim.fish".text = ''
           alias nvi='NVIM_APPNAME=nvchad nvim'
         '';
@@ -85,6 +89,7 @@
   normal.nvchad-ide = {
     includes = [
       normal.nvchad
+      # normal.nvchad-ide._
       normal.aspects.fonts
     ];
     homeManager = {
@@ -107,8 +112,11 @@
         '';
 
         # NvChadIde
-        ".config/nvchad-ide/lua".source = dotfiles/nvchad-ide/lua;
-        ".config/nvchad-ide/init.lua".source = dotfiles/nvchad-ide/init.lua;
+        ".config/nvchad-ide/lua".source = dotfiles/nvchad/lua;
+        # ".config/nvchad/init.lua".source = dotfiles/nvchad/init.lua;
+        ".config/nvchad-ide/init.lua".text = ''
+          require "config.lazy-ide"
+        '';
 
         ".config/fish/conf.d/nvim.fish".text = ''
           alias nvid='neovide'
@@ -122,6 +130,7 @@
         ### formatters
         alejandra
         prettierd
+        prettier
         sqruff
         black
         ruff
@@ -130,9 +139,23 @@
         ### lsp
         nil
         lua-language-server
+
+        # shell
+        bash-language-server
+        fish-lsp
+
+        # protols
+
         sqls
         zls
         gopls
+
+        ## Web deprecated in favor of a per repo:
+        ## bun install inside a `shell.nix`.
+        #
+        typescript-language-server
+        # astro-language-server
+        # vue-language-server
 
         ## markup
         yaml-language-server
@@ -162,6 +185,27 @@
             size = config.normal.font.size - 0.2;
           };
         };
+      };
+    };
+  };
+  normal.nvchad-ide.astro = {
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: {
+      programs.neovim = {
+        initLua = ''
+          vim.lsp.config['astro'] = {
+            init_options = {
+              typescript = {
+                tsdk = ${pkgs.typescript}/lib/node_modules/typescript/lib,
+              },
+            },
+          }
+
+          vim.lsp.enable('astro')
+        '';
       };
     };
   };

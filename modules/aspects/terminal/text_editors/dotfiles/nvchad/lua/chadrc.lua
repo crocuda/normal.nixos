@@ -6,6 +6,31 @@ local M = {}
 
 M.base46 = {
   theme = "doomchad",
+  hl_add = {
+    ["BuffLineFileTitle"] = { bg = "black2", fg = "green" },
+    ["FileCursor"] = { bg = "grey", fg = "green" },
+  },
+  hl_override = {
+    ["St_Lsp"] = { bg = "black2" },
+    ["St_LspMsg"] = { bg = "black2" },
+
+    ["DiagnosticInfo"] = { bg = "black2" },
+    ["St_LspInfo"] = { bg = "black2" },
+
+    ["DiagnosticHint"] = { bg = "black2" },
+    ["St_LspHints"] = { bg = "black2" },
+
+    ["DiagnosticError"] = { bg = "black2" },
+    ["St_lspError"] = { bg = "black2" },
+    ["St_LspError"] = { bg = "black2" },
+
+    ["DiagnosticWarn"] = { bg = "black2" },
+    ["St_lspWarning"] = { bg = "black2" },
+    ["St_LspWarning"] = { bg = "black2" },
+
+    ["St_file_sep"] = { bg = "black2" },
+    ["St_gitIcons"] = { bg = "black2" },
+  },
 }
 
 M.ui = {
@@ -22,7 +47,7 @@ M.ui = {
         local cwd = vim.loop.cwd()
         local path = vim.api.nvim_buf_get_name(0)
         local subpath = string.gsub(path, cwd, "")
-        return "%#St_lspInfo#" .. subpath
+        return "%#BuffLineFileTitle#" .. subpath
       end,
     },
   },
@@ -33,10 +58,14 @@ M.ui = {
     modules = {
       cursor = function()
         local lines = vim.fn.line "$"
-        return "%#St_pos_text# " .. lines .. " l - " .. "%p %% "
+        return "%#FileCursor#" .. " " .. lines .. " l - " .. "%p %% "
       end,
     },
   },
+}
+
+M.term = {
+  base46_colors = true,
 }
 
 return M

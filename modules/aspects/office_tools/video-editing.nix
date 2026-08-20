@@ -34,6 +34,7 @@
 
         # Drawing
         inkscape
+        krita
         gimp
 
         # Image manipulation tools

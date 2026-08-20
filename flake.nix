@@ -23,8 +23,13 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     rustmission.url = "github:intuis/rustmission";
+    rycee.url = "github:nix-community/nur-combined?dir=repos/rycee";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     yofi = {
-      url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
+      url = "github:crocuda/yofi";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

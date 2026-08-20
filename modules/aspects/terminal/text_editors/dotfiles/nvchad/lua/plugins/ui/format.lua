@@ -1,13 +1,8 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    lazy = false,
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     lazy = false,
   },
-
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
@@ -40,6 +35,8 @@ return {
           javascript = { "prettier", "prettierd" },
           typescript = { "prettier", "prettierd" },
 
+          astro = { "prettier", "prettierd" },
+
           typescriptreact = { "prettier", "prettierd" },
           svelte = { "prettier", "prettierd" },
           graphql = { "prettier", "prettierd" },
@@ -57,6 +54,7 @@ return {
           hcl = { "hclfmt" },
           sql = { "sqruff" },
 
+          proto = { "buf" },
           caddy = { "caddy" },
         },
 

@@ -21,7 +21,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup {
   spec = {
     -- load plugins
-    { import = "plugins" },
+    { import = "plugins.ui" },
+    { import = "plugins.ide" },
   },
   defaults = { lazy = true },
   checker = { enable = true },
@@ -68,3 +69,6 @@ require("lazy").setup {
     },
   },
 }
+require "config.options"
+require "config.mappings"
+require "config.neovide"
