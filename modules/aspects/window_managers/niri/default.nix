@@ -41,6 +41,8 @@ with lib; {
       user,
       ...
     }: {
+      programs.niri.enable = true;
+
       # Mudras/Swhkd
       # No longer need to be root.
       # Members of the **input** group can interact with keyboard.
