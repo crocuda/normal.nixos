@@ -274,18 +274,18 @@ Super+g {
   }
 }
 
-// Common utils
+// Common utilsXF86MonBrightnessDownXF86MonBrightnessUp
 brightness_up {
   // @press repeat=true { 
   @press { 
-    - "brightnessctl set 10%+"
+    - r#"brightnessctl set 10%+"#
     // - "light -U 10"
   }
 }
 brightness_down {
   // @press repeat=true { 
   @press { 
-    - "brightnessctl set 10%-"
+    - r#"brightnessctl set 10%-"#
     // - "light -U 10"
   }
 }
