@@ -16,25 +16,9 @@ with lib; {
   };
 
   normal.wm.niri = {
-    ## Add Users to admin groups.
-    policies.to-host = {user, ...}: {
-      nixos = {...}: {
-        users.groups = {
-          input.members = [];
-        };
-        users.users.${user.userName} = {
-          extraGroups = [
-            "input"
-          ];
-        };
-      };
-    };
     includes = [
       normal.wm.base
-      normal.wm.niri.policies.to-host
-      (den.batteries.unfree [
-        "via"
-      ])
+      normal.wm.mudras
     ];
     nixos = {
       pkgs,
@@ -43,26 +27,64 @@ with lib; {
     }: {
       programs.niri.enable = true;
 
-      # Mudras/Swhkd
-      # No longer need to be root.
-      # Members of the **input** group can interact with keyboard.
-      systemd.tmpfiles.rules = [
-        "z /dev/input 0775 root input - -"
-        "z /dev/uinput 0660 root input - -"
-      ];
+      # Niri systemd unit
+      #
+      systemd.services.niri = {
+        enable = true;
+        description = "A scrollable-tiling Wayland compositor";
+        # bindsTo = ["graphical-session.target"];
+        after = ["graphical-session-pre.target"];
+        wants = [
+          "xdg-desktop-autostart.target"
+          # "graphical-session-pre.target"
+        ];
+        before = [
+          "xdg-desktop-autostart.target"
+          ## Error "graphical-session.target" not found:
+          ## - when not using a session manager
+          ## - or when logging through tty
+          # "graphical-session.target"
+        ];
+        serviceConfig = {
+          Slice = "session.slice";
+          Type = "notify";
+          ExecStart = "niri --session";
+        };
+      };
 
-      environment.systemPackages = with pkgs; let
-        inherit (stdenv.hostPlatform) system;
-      in [
+      systemd.services.waybar = {
+        enable = true;
+        description = "";
+        after = [
+          "graphical-session-pre.target"
+        ];
+        wantedBy = ["niri.service"];
+        wants = [
+          "xdg-desktop-autostart.target"
+        ];
+        before = [
+          "xdg-desktop-autostart.target"
+        ];
+        serviceConfig = {
+          Slice = "session.slice";
+          Type = "notify";
+          ExecStart = [
+            "waybar -c ~/.config/waybar/main.jsonc"
+            "waybar -c ~/.config/waybar/metrics.jsonc"
+            "waybar -c ~/.config/waybar/workspaces.jsonc"
+          ];
+        };
+      };
+
+      environment.systemPackages = with pkgs; [
         ## Window manager
         niri
         xwayland-satellite
+
+        wl-clipboard
+
         ## Niri plugin
         # inputs.nirinit.packages.${system}.default
-
-        ## keyboard daemons
-        inputs.mudras.packages.${system}.default
-        # wlr-which-key
 
         ## Bars
         waybar
@@ -70,12 +92,6 @@ with lib; {
         ## Night light
         # redshift
         gammastep
-
-        wl-clipboard
-
-        ## Keyboard utils
-        via
-        wev
       ];
 
       services.udev.packages = with pkgs; [
@@ -112,9 +128,6 @@ with lib; {
         screen = config.normal.wm.niri.screen;
       in
         {
-          # Keyboard
-          ".config/mudras/config.kdl".source = dotfiles/mudras/config.kdl;
-
           # App launcher
           ".config/yofi".source = dotfiles/yofi;
 

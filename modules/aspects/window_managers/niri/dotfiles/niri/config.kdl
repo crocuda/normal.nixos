@@ -16,18 +16,18 @@ spawn-at-startup "gammastep" "-P" "-O" "5500" "-b" "0.8:0.65"
 spawn-at-startup "dunst"
 spawn-at-startup "awww-daemon"
 
-// Keyboard 
+// Keyboard: Replaced by systemd service.
 // spawn-at-startup "mudras" "run"
 
-// Bars
-spawn-sh-at-startup "waybar -c ~/.config/waybar/main.jsonc"
-spawn-sh-at-startup "waybar -c ~/.config/waybar/metrics.jsonc"
-spawn-sh-at-startup "waybar -c ~/.config/waybar/workspaces.jsonc"
+// Bars: Replaced by systemd service.
+// spawn-sh-at-startup "waybar -c ~/.config/waybar/main.jsonc"
+// spawn-sh-at-startup "waybar -c ~/.config/waybar/metrics.jsonc"
+// spawn-sh-at-startup "waybar -c ~/.config/waybar/workspaces.jsonc"
 
-// Restore session
+// Deprecated: Restore session.
 // spawn-sh-at-startup "nirinit"
 
-// Deprecated
+// Deprecated: Keyboard helper
 // spawn-at-startup "wlr-which-key"
 
 // Inputs
