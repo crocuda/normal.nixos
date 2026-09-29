@@ -3,7 +3,7 @@
 # Autostart Hyprland on login
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   export XDG_CURRENT_DESKTOP=niri
-  systemctl start niri.service
+  systemctl start --user niri.service
   # niri --session
 fi
 

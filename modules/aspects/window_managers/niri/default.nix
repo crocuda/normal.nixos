@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  den,
   normal,
   ...
 }:
@@ -29,8 +28,9 @@ with lib; {
 
       # Niri systemd unit
       #
-      systemd.services.niri = {
-        enable = true;
+      # Deprecated in favor of home-manager
+      systemd.user.services.niri = {
+        enable = false;
         description = "A scrollable-tiling Wayland compositor";
         # bindsTo = ["graphical-session.target"];
         after = ["graphical-session-pre.target"];
@@ -48,12 +48,13 @@ with lib; {
         serviceConfig = {
           Slice = "session.slice";
           Type = "notify";
-          ExecStart = "niri --session";
+          ExecStart = "${pkgs.niri}/bin/niri --session";
         };
       };
 
-      systemd.services.waybar = {
-        enable = true;
+      # Deprecated in favor of home-manager
+      systemd.user.services.waybar = {
+        enable = false;
         description = "";
         after = [
           "graphical-session-pre.target"
@@ -69,9 +70,9 @@ with lib; {
           Slice = "session.slice";
           Type = "notify";
           ExecStart = [
-            "waybar -c ~/.config/waybar/main.jsonc"
-            "waybar -c ~/.config/waybar/metrics.jsonc"
-            "waybar -c ~/.config/waybar/workspaces.jsonc"
+            "${pkgs.waybar}/bin/waybar -c ~/.config/waybar/main.jsonc"
+            "${pkgs.waybar}/bin/waybar -c ~/.config/waybar/metrics.jsonc"
+            "${pkgs.waybar}/bin/waybar -c ~/.config/waybar/workspaces.jsonc"
           ];
         };
       };
@@ -121,6 +122,70 @@ with lib; {
           "org/gnome/desktop/wm/preferences" = {
             button-layout = "";
           };
+        };
+      };
+
+      # Niri systemd unit
+      #
+      systemd.user.services.niri = {
+        Unit = {
+          Description = "A scrollable-tiling Wayland compositor";
+          # bindsTo = ["graphical-session.target"];
+          After = ["graphical-session-pre.target"];
+          Wants = [
+            "xdg-desktop-autostart.target"
+            # "graphical-session-pre.target"
+            "waybar_"
+          ];
+          Before = [
+            "xdg-desktop-autostart.target"
+            ## Error "graphical-session.target" not found:
+            ## - when not using a session manager
+            ## - or when logging through tty
+            # "graphical-session.target"
+          ];
+        };
+        Service = {
+          Slice = "session.slice";
+          Type = "notify";
+          ExecStart = "${pkgs.niri}/bin/niri --session";
+        };
+      };
+
+      # bars: main/metrics/workspaces
+      systemd.user.services.waybar = {
+        Install = {
+          WantedBy = ["niri.service"];
+        };
+        Unit = {
+          Description = "Run waybars";
+          Requires = [
+            "niri.service"
+          ];
+          After = [
+            "niri.service"
+            "graphical-session-pre.target"
+          ];
+          Wants = [
+            "xdg-desktop-autostart.target"
+          ];
+          Before = [
+            "xdg-desktop-autostart.target"
+          ];
+        };
+        Service = {
+          Slice = "session.slice";
+          Type = "forking";
+          ExecStart = let
+            name = "waybar_script";
+            text = ''
+              set -e
+              ${pkgs.waybar}/bin/waybar -c ~/.config/waybar/main.jsonc &
+              ${pkgs.waybar}/bin/waybar -c ~/.config/waybar/metrics.jsonc &
+              ${pkgs.waybar}/bin/waybar -c ~/.config/waybar/workspaces.jsonc &
+            '';
+            script = pkgs.writeShellScriptBin name text;
+          in "${script}/bin/${name}";
         };
       };
 

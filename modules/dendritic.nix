@@ -14,7 +14,7 @@
   flake-file.inputs = {
     ###################################
     ## Dendritic
-    flake-file.url = lib.mkDefault "github:vic/flake-file";
+    flake-file.url = lib.mkDefault "github:denful/flake-file";
     den.url = lib.mkDefault "github:denful/den";
     flake-parts.url = lib.mkDefault "github:hercules-ci/flake-parts";
     import-tree.url = "github:denful/import-tree";

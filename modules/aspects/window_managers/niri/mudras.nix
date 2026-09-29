@@ -1,11 +1,9 @@
 {
   inputs,
-  lib,
   den,
-  normal,
+  mudras,
   ...
-}:
-with lib; {
+}: {
   flake-file.inputs = {
     mudras.url = "github:crocuda/mudras?ref=dev";
     yofi = {
@@ -15,18 +13,21 @@ with lib; {
     };
   };
 
+  imports = [
+    inputs.mudras.flakeModules.default
+  ];
+
   normal.wm.mudras = {
     includes = [
-      normal.wm.mudras.policies.to-host
+      mudras.aspects.mudras
       (den.batteries.unfree [
         "via"
       ])
     ];
-    nixos = {
-      pkgs,
-      user,
-      ...
-    }: {
+    nixos = {pkgs, ...}: {
+      imports = [
+        inputs.mudras.nixosModules.default
+      ];
       environment.systemPackages = with pkgs; let
         inherit (stdenv.hostPlatform) system;
       in [
@@ -38,16 +39,15 @@ with lib; {
       ];
       services.mudras.enable = true;
     };
-  };
-  homeManager = {
-    lib,
-    pkgs,
-    config,
-    ...
-  }: {
-    home.file = {
-      # Keyboard
-      ".config/mudras/config.kdl".source = dotfiles/mudras/config.kdl;
+    homeManager = {
+      pkgs,
+      config,
+      ...
+    }: {
+      home.file = {
+        # Keyboard
+        ".config/mudras/config.kdl".source = dotfiles/mudras/config.kdl;
+      };
     };
   };
 }
