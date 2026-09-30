@@ -6,13 +6,19 @@
 }:
 with lib; {
   flake-file.inputs = {
-    mudras.url = "github:crocuda/mudras?ref=dev";
     yofi = {
       url = "github:crocuda/yofi";
       # url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  ## Already imported
+  # Must be imported once, otherwise options will be declared n times,
+  # raising an error.
+  # imports = [
+  # inputs.mudras.flakeModules.default
+  # ];
 
   normal.wm.niri = {
     includes = [
@@ -32,22 +38,25 @@ with lib; {
       systemd.user.services.niri = {
         enable = false;
         description = "A scrollable-tiling Wayland compositor";
-        # bindsTo = ["graphical-session.target"];
-        after = ["graphical-session-pre.target"];
+        bindsTo = ["graphical-session.target"];
+        after = [
+          "graphical-session-pre.target"
+          "ssh-agent.service"
+        ];
         wants = [
           "xdg-desktop-autostart.target"
-          # "graphical-session-pre.target"
+          "graphical-session-pre.target"
         ];
         before = [
-          "xdg-desktop-autostart.target"
+          # "xdg-desktop-autostart.target"
           ## Error "graphical-session.target" not found:
           ## - when not using a session manager
           ## - or when logging through tty
           # "graphical-session.target"
         ];
         serviceConfig = {
-          Slice = "session.slice";
           Type = "notify";
+          Slice = "session.slice";
           ExecStart = "${pkgs.niri}/bin/niri --session";
         };
       };
@@ -58,16 +67,17 @@ with lib; {
         description = "";
         after = [
           "graphical-session-pre.target"
+          "niri.services"
         ];
         wantedBy = ["niri.service"];
         wants = [
-          "xdg-desktop-autostart.target"
+          # "xdg-desktop-autostart.target"
         ];
         before = [
-          "xdg-desktop-autostart.target"
+          # "xdg-desktop-autostart.target"
         ];
         serviceConfig = {
-          Slice = "session.slice";
+          Slice = "app.slice";
           Type = "notify";
           ExecStart = [
             "${pkgs.waybar}/bin/waybar -c ~/.config/waybar/main.jsonc"

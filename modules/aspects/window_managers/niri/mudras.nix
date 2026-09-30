@@ -6,36 +6,37 @@
 }: {
   flake-file.inputs = {
     mudras.url = "github:crocuda/mudras?ref=dev";
-    yofi = {
-      url = "github:crocuda/yofi";
-      # url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
+  # Must be imported once,
+  # otherwise options will be declared n times,
+  # and raise an error.
   imports = [
-    inputs.mudras.flakeModules.default
+    # inputs.mudras.flakeModules.default
   ];
 
   normal.wm.mudras = {
     includes = [
-      mudras.aspects.mudras
+      mudras.aspects.default
       (den.batteries.unfree [
         "via"
       ])
     ];
-    ## Alternative: If you don't want to use the flakeModule.
+    ## Alternative: If you don't want to use the flakeModule,
+    ## Or prefer the nixosModule:
+    #
     # nixos = {pkgs, ...}: {
     # imports = [
     # inputs.mudras.nixosModules.default
     # ];
-    # services.mudras.enable = true;
     # environment.systemPackages = with pkgs; let
     #   inherit (stdenv.hostPlatform) system;
     # in [
     # inputs.mudras.packages.${system}.default
     # ];
+    # services.mudras.enable = true;
     # };
+    #
     homeManager = {
       pkgs,
       config,
