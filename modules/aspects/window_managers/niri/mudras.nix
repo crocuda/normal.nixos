@@ -24,21 +24,18 @@
         "via"
       ])
     ];
-    nixos = {pkgs, ...}: {
-      imports = [
-        inputs.mudras.nixosModules.default
-      ];
-      environment.systemPackages = with pkgs; let
-        inherit (stdenv.hostPlatform) system;
-      in [
-        ## keyboard daemons
-        inputs.mudras.packages.${system}.default
-        # wlr-which-key
-        ## Keyboard utils
-        via
-      ];
-      services.mudras.enable = true;
-    };
+    ## Alternative: If you don't want to use the flakeModule.
+    # nixos = {pkgs, ...}: {
+    # imports = [
+    # inputs.mudras.nixosModules.default
+    # ];
+    # services.mudras.enable = true;
+    # environment.systemPackages = with pkgs; let
+    #   inherit (stdenv.hostPlatform) system;
+    # in [
+    # inputs.mudras.packages.${system}.default
+    # ];
+    # };
     homeManager = {
       pkgs,
       config,
