@@ -255,11 +255,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1790748746,
-        "narHash": "sha256-9mt2gqaZwI0T1uJWYmUZxSJEyInF3icNCV21xDiMDMU=",
+        "lastModified": 1790749310,
+        "narHash": "sha256-SYmSSwW/eAbiQQ1cz5MlYz0bKH23CEW1kGJronJfhjg=",
         "owner": "crocuda",
         "repo": "mudras",
-        "rev": "5e1a4f1df9ad0fa4bfe31d23f2768becbf163111",
+        "rev": "e5fd52c66dd03f33152397417e0c9a5527788c77",
         "type": "github"
       },
       "original": {
