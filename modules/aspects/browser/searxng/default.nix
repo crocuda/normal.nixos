@@ -1,11 +1,15 @@
-{...}: {
+{inputs, ...}: {
   normal.browser.searxng = {
     nixos = {
       pkgs,
       config,
       lib,
       ...
-    }: {
+    }: let
+      # DEBUG
+      system = pkgs.stdenv.hostPlatform.system;
+      pkgs-unstable = (import inputs.nixpkgs-unstable {inherit system;}).pkgs;
+    in {
       environment.systemPackages = with pkgs; [
         ## Search engine
         # A local search engine that gather other search engine results.
@@ -18,7 +22,7 @@
 
       services.searx = {
         enable = true;
-        # package = pkgs-unstable.searxng;
+        package = pkgs-unstable.searxng;
         redisCreateLocally = true;
 
         settings = {
@@ -102,7 +106,7 @@
             "brave".disabled = true;
 
             # Resources
-            "annas_archives".disabled = false;
+            "annas archives".disabled = false;
             "nyaa".disabled = false;
             "1337x".disabled = true;
 

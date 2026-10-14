@@ -1,6 +1,6 @@
 file_format: "1"
 id: tbk_mini
-name: TBK Mini Bluetooth
+name: TBK Mini Fire
 type: shield
 url: https://github.com/Bastardkb/TBK-Mini
 requires: [pro_micro]

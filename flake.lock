@@ -201,11 +201,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791996224,
-        "narHash": "sha256-lS523xDX6NTesxx/Aug40ofe703pZXJRQ1+NDPdDMdY=",
+        "lastModified": 1792000010,
+        "narHash": "sha256-4jtkwQlReQdXsKJJfB9yT7nIf0TlwgZOk2XtxjUgDS8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f12e97b106c6f23aeec1cafaf4af533ba0893a1f",
+        "rev": "5a9d300bd619c03857521b50c8877a19dbad7078",
         "type": "github"
       },
       "original": {
@@ -480,11 +480,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1791997191,
-        "narHash": "sha256-XOQGdPesI7JvXFqFBQD0D31jsNAbWrvETT1HkNn5UsE=",
+        "lastModified": 1792002673,
+        "narHash": "sha256-CskQ28iGydfFZ3h10Nt1YMndO434TVxzLrmrUbLi+Og=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "30aba85c8090d25ed2307b015f1deb04db6586a6",
+        "rev": "55840743dd5e1e46eb23024357cf1a7c503978d5",
         "type": "github"
       },
       "original": {
@@ -623,11 +623,11 @@
       },
       "locked": {
         "dir": "repos/rycee",
-        "lastModified": 1791995977,
-        "narHash": "sha256-LkmRmpWVbCJ6crFYDI8k0Pxk/nWJlBx2RUCC9EpsuNs=",
+        "lastModified": 1792002815,
+        "narHash": "sha256-W0JzJQpuODQE9lmHuGuYdj5OU1VkMLV2ptJWNYx/i8A=",
         "owner": "nix-community",
         "repo": "nur-combined",
-        "rev": "feb48ca7ae753e9bce5c2415de1b8682238a54a7",
+        "rev": "e1f34d4b5fcbd710d16a1781d365c7987f3f3224",
         "type": "github"
       },
       "original": {

@@ -12,7 +12,7 @@
   # otherwise options will be declared n times,
   # and raise an error.
   imports = [
-    # inputs.mudras.flakeModules.default
+    inputs.mudras.flakeModules.default
   ];
 
   normal.wm.mudras = {

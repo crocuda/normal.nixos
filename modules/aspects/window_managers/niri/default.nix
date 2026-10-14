@@ -7,7 +7,8 @@
 with lib; {
   flake-file.inputs = {
     yofi = {
-      url = "github:crocuda/yofi";
+      url = "github:l4l/yofi";
+      # url = "github:crocuda/yofi";
       # url = "github:l4l/yofi?ref=09901e75cbdf2147553ab888adde480e57baa0d1";
       inputs.nixpkgs.follows = "nixpkgs";
     };

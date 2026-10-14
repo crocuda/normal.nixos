@@ -1,7 +1,7 @@
 if SHIELD_TBK_MINI_LEFT
  
 config ZMK_KEYBOARD_NAME
-    default "TBK Mini Bluetooth"
+    default "TBK Mini Fire"
  
 config ZMK_SPLIT_ROLE_CENTRAL
     default y

@@ -26,7 +26,7 @@
         board = "nice_nano@2.0.0";
         shield = "tbk_mini_%PART%";
 
-        zephyrDepsHash = "sha256-9nQeZNViGZft1Xd8DnEllDi1MeQTd1ejTKzf1x2XlG0=";
+        zephyrDepsHash = "sha256-zDnYk7iavZLcuPRrl8QUMROnvikwBGOrDa5prc2cFtk=";
 
         # For usb debugging purpose (check keys layout conformity...)
         # extraWestBuildFlags = ["--snippet" "zmk-usb-logging"];

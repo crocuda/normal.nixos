@@ -1,6 +1,7 @@
 {
   lib,
   normal,
+  inputs,
   ...
 }: {
   normal.wm.base = {
@@ -109,6 +110,10 @@
       config,
       ...
     }: let
+      # DEBUG
+      system = pkgs.stdenv.hostPlatform.system;
+      pkgs-unstable = (import inputs.nixpkgs-unstable {inherit system;}).pkgs;
+
       # https://nixos.wiki/wiki/Cursor_Themes
       bibata = pkgs.runCommand "moveUp" {} ''
         mkdir -p $out/share/icons
@@ -176,7 +181,7 @@
           };
           iconTheme = {
             name = "Tela-circle";
-            package = tela-circle-icon-theme;
+            package = pkgs-unstable.tela-circle-icon-theme;
           };
           font = {
             name = "JetBrainsMono";
