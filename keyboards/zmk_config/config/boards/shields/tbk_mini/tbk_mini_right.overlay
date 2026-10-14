@@ -1,4 +1,4 @@
-#include "tbkblu.dtsi"
+#include "tbk_mini.dtsi"
 
 &default_transform {
 	col-offset = <6>;

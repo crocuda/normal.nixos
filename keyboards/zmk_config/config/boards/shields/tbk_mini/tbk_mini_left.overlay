@@ -1,4 +1,4 @@
-#include "tbkblu.dtsi"
+#include "tbk_mini.dtsi"
 
 &kscan0 {
 	compatible = "zmk,kscan-gpio-matrix";

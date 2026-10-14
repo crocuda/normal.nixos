@@ -1,6 +1,6 @@
 file_format: "1"
-id: tbkblu
-name: TBKMiniBlu
+id: tbk_mini
+name: TBK Mini Bluetooth
 type: shield
 url: https://github.com/Bastardkb/TBK-Mini
 requires: [pro_micro]
@@ -8,5 +8,5 @@ features:
   - keys
   - studio
 siblings:
-  - tbkblu_left
-  - tbkblu_right
+  - tbk_mini_left
+  - tbk_mini_right

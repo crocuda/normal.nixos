@@ -1,14 +1,14 @@
-if SHIELD_TBKBLU_LEFT
+if SHIELD_TBK_MINI_LEFT
  
 config ZMK_KEYBOARD_NAME
-    default "TBKMiniBlu"
+    default "TBK Mini Bluetooth"
  
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
  
 endif
  
-if SHIELD_TBKBLU_LEFT || SHIELD_TBKBLU_RIGHT
+if SHIELD_TBK_MINI_LEFT || SHIELD_TBK_MINI_RIGHT
  
 config ZMK_SPLIT
     default y
