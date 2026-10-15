@@ -223,37 +223,39 @@ vim.lsp.enable { "ts_ls", "vue_ls" } -- If using `ts_ls` replace `vtsls` to `ts_
 
 -- Toggle diagnostic virtual text
 local function diagnostic_floating_window()
-  vim.diagnostic.open_float(nil, { focus = false })
+  vim.diagnostic.open_float(nil, {
+    focus = false,
+    scope = "line",
+    close_events = { "BufLeave", "CursorMoved", "InsertLeave" },
+  })
 end
-vim.api.nvim_create_autocmd("CursorHoldI", { callback = diagnostic_floating_window })
+vim.api.nvim_create_autocmd({ "CursorHoldI" }, { callback = diagnostic_floating_window })
+-- vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, { callback = diagnostic_floating_window })
 
-vim.diagnostic.config {
-  -- float = "always",
-  virtual_text = false,
-  severity_sort = true,
-  inlay_hints = {
-    enabled = false,
-  },
-}
-
-local function options(_, opts)
-  -- Diagnostic styling
-  -- Enable diagnostic floating window on insert mode
-  --
-  opts.diagnostics = {
-    virtual_text = false,
-    severity_sort = true,
-    inlay_hints = {
-      enabled = false,
-    },
-  }
-  return opts
-end
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
+  callback = function(_)
+    vim.diagnostic.config {
+      jump = {
+        float = true,
+      },
+      float = {
+        border = "single",
+        header = "",
+      },
+      update_in_insert = false,
+      -- float = "always",
+      virtual_text = false,
+      severity_sort = true,
+      inlay_hints = {
+        enabled = false,
+      },
+    }
+  end,
+})
 
 return {
   {
     "neovim/nvim-lspconfig",
     lazy = false,
-    opts = options,
   },
 }

@@ -30,6 +30,9 @@ M.base46 = {
 
     ["St_file_sep"] = { bg = "black2" },
     ["St_gitIcons"] = { bg = "black2" },
+
+    ["NormalFloat"] = { bg = "black2" },
+    ["FloatBorder"] = { fg = "light_grey" },
   },
 }
 

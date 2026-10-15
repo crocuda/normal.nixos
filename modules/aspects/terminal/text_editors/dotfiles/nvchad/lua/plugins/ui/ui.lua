@@ -67,7 +67,9 @@ return {
     "mrjones2014/smart-splits.nvim",
     lazy = false,
     opts = {
-      cursor_follows_swapped_bufs = true,
+      swap = {
+        move_cursor = true,
+      },
     },
   },
   {

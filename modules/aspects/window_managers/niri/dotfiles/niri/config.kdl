@@ -145,6 +145,7 @@ window-rule {
 }
 window-rule {
   match app-id=r#"^com\.obsproject\.Studio$"#
+  block-out-from "screencast"
   open-maximized false
   open-fullscreen false
 }
@@ -165,6 +166,7 @@ window-rule {
 }
 window-rule {
   match app-id=r#"firefox"# title=r#"Youtube"# is-floating=true
+  match app-id=r#"firefox"# title=r#"^.*Youtube.*$"# is-floating=true
   default-column-width { proportion 0.3; }
   default-window-height { proportion 0.66; }
 }

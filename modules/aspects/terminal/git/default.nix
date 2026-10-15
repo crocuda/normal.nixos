@@ -42,15 +42,19 @@
               pager = "less";
               paginate = "never";
               show-cryptographtic-signatures = true; # performance cost for large change logs
+
+              log-word-wrap = true;
             };
             aliases = {
               # Short history
-              l = ["log" "--revisions" "root()..@" "--limit" "6"];
-              ll = ["log" "--limit" "12"];
-              diffshow = ["nvim" "-u" "~/.config/nvchad/init.lua" "-c" "DiffViewOpen"];
+              l = ["log" "--revisions" "..@" "--limit" "8"];
+              ll = ["log" "--revisions" ".." "--limit" "16"];
+              lls = ["log" "--revisions" ".." "--limit" "16" "-T" "builtin_log_compact_full_description"];
+              lld = ["log" "--revisions" ".." "--limit" "16" "-T" "log_commit_verbose_graph"];
 
               stt = ["diff" "--stat"];
 
+              diffshow = ["util" "exec" "--" "nvim" "-u" "~/.config/nvchad/init.lua" "-c" "DiffViewOpen"];
               # Git wrapped commands
               push = ["git" "push"];
               fetch = ["git" "fetch"];
@@ -61,43 +65,58 @@
             #   key = "~/.ssh/id_ed25519_signing";
             #   backends.ssh.allowed-signers = "~/.ssh/allowed-signers";
             # };
-            templates = {
-              draft_commit_description = let
-                hint = builtins.readFile ./dotfiles/conventional_change_message;
-                author = ''
-                  indent("JJ: ",
-                    concat(
-                      "Author: ",
-                      author.name(),
-                      "\n"
-                    )
-                  )
-                '';
-                email = ''
-                  indent("JJ: ",
-                    concat(
-                      "Email: ",
-                      author.email(),
-                      "\n"
-                    )
-                  )
-                '';
-                signature = ''
-                  if(self.signature(),
-                    indent("JJ:     ",
-                      concat(
-                        self.signature().status(),
-                        self.signature().display(),
-                      ),
-                    ),
-                  )
-                '';
-                changes = ''
+            templates = let
+              hint = builtins.readFile ./dotfiles/conventional_change_message;
+              author = ''
+                indent("JJ: ",
                   concat(
-                    indent("JJ:     ", diff.stat(72)),
+                    "Author: ",
+                    author.name()
                   )
-                '';
-              in ''
+                )
+              '';
+              email = ''
+                indent("JJ: ",
+                  concat(
+                    "Email: ",
+                    author.email()
+                  )
+                )
+              '';
+              author_email = ''
+                concat(
+                  ${author},
+                  ${email}
+                )
+              '';
+              signature = ''
+                if(self.signature(),
+                  indent("JJ:     ",
+                    concat(
+                      self.signature().status(),
+                      self.signature().display(),
+                      "\n"
+                    ),
+                  ),
+                )
+              '';
+              changes = ''
+                concat(
+                  indent("JJ:     ", diff.stat(72)),
+                )
+              '';
+            in {
+              log_commit_verbose_graph = ''
+                concat(
+                  ${signature},
+                  "\n",
+                  commit_id,
+                  "\n",
+                  description,
+                  "\n",
+                  ${author_email}
+              '';
+              draft_commit_description = ''
                 concat(
                   ${signature},
                   description,
@@ -106,10 +125,22 @@
                     "\nJJ: This commit contains the following changes:\n","",
                     ${changes}
                   ),
-                  ${author},
-                  ${email},
+                  "\n",
+                  ${author_email},
                 )
               '';
+              # new_description = ''
+              #   if(parents.len() > 1,
+              #     "Merge " ++ parents.skip(1).map(|p| try(
+              #       p.bookmarks().first().name(),
+              #       p.change_id().shortest(8)
+              #     )).join(", ") ++ " into " ++ try(
+              #       parents.first().bookmarks().first().name(),
+              #       parents.first().change_id().shortest(8)
+              #     ) ++ "\n",
+              #     ""
+              #   )
+              # '';
             };
           };
         };

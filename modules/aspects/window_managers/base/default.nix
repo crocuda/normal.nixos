@@ -197,13 +197,10 @@
         };
       };
       ## Qt theming
-      qt = with pkgs; {
+      qt = {
         enable = true;
         platformTheme.name = "qtct";
-        style = {
-          name = "breeze-dark";
-          package = kdePackages.breeze;
-        };
+        style.name = "breeze";
       };
     };
   };
