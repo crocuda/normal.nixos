@@ -9,7 +9,9 @@
     flakeModules.default = {...}: {
       imports =
         builtins.filter (
-          p: (lib.hasSuffix ".nix" p && !lib.hasInfix "/_" p)
+          p:
+            (lib.hasSuffix ".nix" p && !lib.hasInfix "_" p)
+            || (lib.pathIsDirectory p && !lib.hasInfix "/_" p)
         ) (
           lib.filesystem.listFilesRecursive ../../modules
         );
