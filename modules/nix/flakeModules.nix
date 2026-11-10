@@ -1,16 +1,4 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
-  flake-file.inputs = {
-    flake-parts.url = lib.mkDefault "github:hercules-ci/flake-parts";
-  };
-
-  imports = [
-    inputs.flake-parts.flakeModules.flakeModules
-  ];
-
+{inputs, ...}: {
   flake = {lib, ...}: rec {
     ## Do not work
     # flakeModules.default = inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ../../modules);
