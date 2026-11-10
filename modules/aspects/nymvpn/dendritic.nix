@@ -12,7 +12,7 @@
       pkgs,
       ...
     }: {
-      imports = [./_nixos/default.nix];
+      # imports = [./_nixos/default.nix];
     };
     homeManager = {pkgs, ...}: {
     };
