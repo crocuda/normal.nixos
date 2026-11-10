@@ -7,9 +7,12 @@
     # Taken from denful/den source code at "nix/flakeModule.nix".
     flakeModule = flakeModules.default;
     flakeModules.default = {...}: {
-      imports = builtins.filter (p: lib.hasSuffix ".nix" p && !lib.hasInfix "/_" p) (
-        lib.filesystem.listFilesRecursive ../../modules
-      );
+      imports =
+        builtins.filter (
+          p: (lib.hasSuffix ".nix" p && !lib.hasInfix "/_" p)
+        ) (
+          lib.filesystem.listFilesRecursive ../../modules
+        );
     };
   };
 }

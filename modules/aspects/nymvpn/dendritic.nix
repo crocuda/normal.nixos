@@ -4,15 +4,15 @@
   ...
 }: {
   normal.nymvpn = {
-    includes = [
-    ];
+    # includes = [
+    # ];
     nixos = {
       lib,
       config,
       pkgs,
       ...
     }: {
-      # imports = [./_nixos/default.nix];
+      imports = [./_nixos/_default.nix];
     };
     homeManager = {pkgs, ...}: {
     };
