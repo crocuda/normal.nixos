@@ -229,9 +229,12 @@ with lib; {
         image_to_grayscale = pkgs.writeShellScriptBin "image_to_grayscale" ''
           convert $1 -colorspace gray $1.gray.jpeg
         '';
+        # Yofi tests tend to fail under nixos maybe due to missing buildInputs,
+        # so we disable them (TODO: We should PR the missing deps)
+        yofi = inputs.yofi.packages.${system}.default.overrideAttrs {doCheck = false;};
       in [
         # Yofi and dependencies
-        inputs.yofi.packages.${system}.default
+        yofi
 
         # Wallpapers
         awww

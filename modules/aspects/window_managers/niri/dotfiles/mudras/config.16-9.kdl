@@ -7,7 +7,7 @@ Super+Enter {
 }
 Super+Space {
   @press {
-    - "yofi"
+    - "yofi apps"
   }
 }
 Super+u {
@@ -94,7 +94,7 @@ Super+g {
   }
   Super+Space{
     @press {
-      - "yofi"
+      - "yofi apps"
     }
   }
   Super+q {

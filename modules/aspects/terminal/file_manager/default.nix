@@ -20,6 +20,9 @@ with lib; {
         # For bsdtar
         libarchive
 
+        # Tree file explorer
+        broot
+
         unrar
         dust
 

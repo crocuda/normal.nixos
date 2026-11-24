@@ -22,6 +22,7 @@
         "via"
       ])
     ];
+
     ## Alternative: If you don't want to use the flakeModule,
     ## Or prefer the nixosModule:
     #
